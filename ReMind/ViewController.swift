@@ -95,6 +95,60 @@ class ViewController: UIViewController {
         tapGestureRecognizer.require(toFail: doubleTap)
     }
     
+    private func setupPlayer() {
+        let path = Bundle.main.path(forResource: "zemlja", ofType: "mp3")!
+        let url = URL(fileURLWithPath: path)
+        
+        player = AKPlayer(url: url)
+        
+        player.buffering = .always
+        player.completionHandler = { [weak self] in
+            guard let self = self,
+                  let split = self.selectedSplit, self.isLooping else { return }
+            
+            self.player.play(from: split.startTime, to: split.endTime)
+        }
+        
+        AKManager.output = player
+        try! AKManager.start()
+        
+        let newDurationSeconds = Float(player.duration)
+        let currentTime = Float(CMTimeGetSeconds(CMTime(seconds: player.currentTime, preferredTimescale: 1)))
+        
+        timeSlider.minimumValue = currentTime
+        timeSlider.maximumValue = newDurationSeconds
+        
+        let fullSplit = Split(startTime: 0.0, endTime: player.duration)
+        splits.append(fullSplit)
+        collectionView.reloadData()
+        
+        updateTimeStrings()
+    }
+    
+    private func setupPlaybackTimer() {
+        if playbackTimer == nil {
+            let timeInterval = 0.05
+            
+            playbackTimer = Timer.scheduledTimer(withTimeInterval: timeInterval, repeats: true) { [weak self ]timer in
+                guard let self = self, self.player.isPlaying else { return }
+
+                // Simply use the currentTime of the player and multiply to extrapolate across the full width of the collection view
+                let maxWidth = self.collectionView.frame.width
+                let multiplier = Double(maxWidth) / self.player.duration
+                
+                // Update playhead position
+                let newConstant = self.originalPlayheadLeadingConstant + CGFloat(multiplier * Float(self.player.currentTime))
+                self.leadingPlayheadConstraint.constant = newConstant
+                
+                // Update position on UISlider
+                self.timeSlider.value = Float(self.player.currentTime)
+                
+                // Update text on time strings
+                self.updateTimeStrings()
+            }
+        }
+    }
+    
     // MARK: - Gesture recognizers
     @objc func handleTap(recognizer: UITapGestureRecognizer) {
         FeedbackGenerator.shared.fire(for: .heavy)
@@ -152,15 +206,7 @@ class ViewController: UIViewController {
         
         switch recognizer.state {
         case .ended:
-            if let indexPath = collectionView.indexPathForItem(at: touchPoint) {
-
-                let row = indexPath.row
-                let split = splits[row]
-                selectedSplit = split
-                isLooping = true
-
-                playMusic(shouldSwitch: false, loop: true, from: split.startTime, to: split.endTime)
-            }
+            playSplitIfPossible(at: touchPoint)
         case .began, .possible, .cancelled, .failed, .changed: break
         @unknown default: break
         }
@@ -170,36 +216,12 @@ class ViewController: UIViewController {
         playMusic(shouldSwitch: true)
     }
     
-    func setupPlaybackTimer() {
-        if playbackTimer == nil {
-            let timeInterval = 0.05
-            
-            playbackTimer = Timer.scheduledTimer(withTimeInterval: timeInterval, repeats: true) { [weak self ]timer in
-                guard let self = self, self.player.isPlaying else { return }
-
-                // Simply use the currentTime of the player and multiply to extrapolate across the full width of the collection view
-                let maxWidth = self.collectionView.frame.width
-                let multiplier = Double(maxWidth) / self.player.duration
-                
-                // Update playhead position
-                let newConstant = self.originalPlayheadLeadingConstant + CGFloat(multiplier * Float(self.player.currentTime))
-                self.leadingPlayheadConstraint.constant = newConstant
-                
-                // Update position on UISlider
-                self.timeSlider.value = Float(self.player.currentTime)
-                
-                // Update text on time strings
-                self.updateTimeStrings()
-            }
-        }
-    }
-    
     // Only gets triggered when user interacts with this
     @IBAction func timerSliderChanged(_ sender: UISlider) {
         print("My value is: \(sender.value)")
     }
     
-    func playMusic(shouldSwitch: Bool, loop: Bool = false, from: Double? = nil, to: Double? = nil) {
+    private func playMusic(shouldSwitch: Bool, loop: Bool = false, from: Double? = nil, to: Double? = nil) {
         defer {
             isLooping = loop
             
@@ -247,47 +269,20 @@ class ViewController: UIViewController {
         
     }
     
+    // MARK: - IBActions
+    @IBAction func split(_ sender: Any) {
+        splitTrack()
+    }
     
-    func setupPlayer() {
-        let path = Bundle.main.path(forResource: "zemlja", ofType: "mp3")!
-        let url = URL(fileURLWithPath: path)
-        
-        player = AKPlayer(url: url)
-        
-        player.buffering = .always
-        player.completionHandler = { [weak self] in
-            guard let self = self,
-                  let split = self.selectedSplit, self.isLooping else { return }
+    private func updateTimeStrings() {
+            let newDurationSeconds = Float(player.duration)
+            let currentTime = Float(CMTimeGetSeconds(CMTime(seconds: player.currentTime, preferredTimescale: 1)))
             
-            self.player.play(from: split.startTime, to: split.endTime)
+            startLabel.text = createTimeString(time: currentTime)
+            endLabel.text = createTimeString(time: newDurationSeconds)
         }
         
-        AKManager.output = player
-        try! AKManager.start()
-        
-        let newDurationSeconds = Float(player.duration)
-        let currentTime = Float(CMTimeGetSeconds(CMTime(seconds: player.currentTime, preferredTimescale: 1)))
-        
-        timeSlider.minimumValue = currentTime
-        timeSlider.maximumValue = newDurationSeconds
-        
-        let fullSplit = Split(startTime: 0.0, endTime: player.duration)
-        splits.append(fullSplit)
-        collectionView.reloadData()
-        
-        updateTimeStrings()
-    }
-    
-    func updateTimeStrings() {
-        let newDurationSeconds = Float(player.duration)
-        let currentTime = Float(CMTimeGetSeconds(CMTime(seconds: player.currentTime, preferredTimescale: 1)))
-        
-        startLabel.text = createTimeString(time: currentTime)
-        endLabel.text = createTimeString(time: newDurationSeconds)
-    }
-    
-    @IBAction func split(_ sender: Any) {
-        
+    private func splitTrack() {
         if let indexPath = indexPathAtPlayheadPoint {
 
             let row = indexPath.row
@@ -301,6 +296,18 @@ class ViewController: UIViewController {
         }
         
         collectionView.reloadData()
+    }
+    
+    private func playSplitIfPossible(at touchLocation: CGPoint) {
+        if let indexPath = collectionView.indexPathForItem(at: touchLocation) {
+
+            let row = indexPath.row
+            let split = splits[row]
+            selectedSplit = split
+            isLooping = true
+
+            playMusic(shouldSwitch: false, loop: true, from: split.startTime, to: split.endTime)
+        }
     }
 }
 
