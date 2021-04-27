@@ -25,7 +25,6 @@ class ViewController: UIViewController {
     // UI components
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var playPauseImageView: UIImageView!
-    @IBOutlet weak var timeSlider: UISlider!
     @IBOutlet weak var startLabel: UILabel!
     @IBOutlet weak var endLabel: UILabel!
     
@@ -68,7 +67,17 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         setupPlayer()
+        setupGestureRecognizers()
+        setupPlaybackTimer()
         
+        collectionView.automaticallyAdjustsScrollIndicatorInsets = false
+        
+        // Tracks if we've moved 5 steps or more to play another haptic feedback through the Feedback generator
+        previousHapticX = leadingPlayheadConstraint.constant
+        originalPlayheadLeadingConstant = leadingPlayheadConstraint.constant
+    }
+    
+    private func setupGestureRecognizers() {
         let longPress = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress(recognizer:)))
         collectionView.addGestureRecognizer(longPress)
         longPress.delegate = self
@@ -84,17 +93,54 @@ class ViewController: UIViewController {
         collectionView.addGestureRecognizer(doubleTap)
         
         tapGestureRecognizer.require(toFail: doubleTap)
-        
-        timeSlider.value = 0
-        collectionView.automaticallyAdjustsScrollIndicatorInsets = false
-        
-        setupPlaybackTimer()
-        
-        previousHapticX = leadingPlayheadConstraint.constant
-        originalPlayheadLeadingConstant = leadingPlayheadConstraint.constant
-        
     }
     
+    private func setupPlayer() {
+        let path = Bundle.main.path(forResource: "zemlja", ofType: "mp3")!
+        let url = URL(fileURLWithPath: path)
+        
+        player = AKPlayer(url: url)
+        
+        player.buffering = .always
+        player.completionHandler = { [weak self] in
+            guard let self = self,
+                  let split = self.selectedSplit, self.isLooping else { return }
+            
+            self.player.play(from: split.startTime, to: split.endTime)
+        }
+        
+        AKManager.output = player
+        try! AKManager.start()
+        
+        let fullSplit = Split(startTime: 0.0, endTime: player.duration)
+        splits.append(fullSplit)
+        collectionView.reloadData()
+        
+        updateTimeStrings()
+    }
+    
+    private func setupPlaybackTimer() {
+        if playbackTimer == nil {
+            let timeInterval = 0.05
+            
+            playbackTimer = Timer.scheduledTimer(withTimeInterval: timeInterval, repeats: true) { [weak self ]timer in
+                guard let self = self, self.player.isPlaying else { return }
+
+                // Simply use the currentTime of the player and multiply to extrapolate across the full width of the collection view
+                let maxWidth = self.collectionView.frame.width
+                let multiplier = Double(maxWidth) / self.player.duration
+                
+                // Update playhead position
+                let newConstant = self.originalPlayheadLeadingConstant + CGFloat(multiplier * Float(self.player.currentTime))
+                self.leadingPlayheadConstraint.constant = newConstant
+                
+                // Update text on time strings
+                self.updateTimeStrings()
+            }
+        }
+    }
+    
+    // MARK: - Gesture recgnizers
     @objc func handleTap(recognizer: UITapGestureRecognizer) {
         FeedbackGenerator.shared.fire(for: .heavy)
         playMusic(shouldSwitch: true)
@@ -107,13 +153,18 @@ class ViewController: UIViewController {
         case .began: return
             //hapticGenerator?.fireContinuous()
         case .changed:
-            let touchPoint = recognizer.location(in: view)
+            let touchPoint = recognizer.location(in: collectionView)
             var newX = touchPoint.x
+            
+            print("Touch point: \(touchPoint)")
+            print("Collection view frame: \(collectionView.frame)")
+            
             if newX < collectionView.frame.origin.x {
                 newX = collectionView.frame.origin.x
-            } else if newX > collectionView.frame.origin.x + collectionView.frame.size.width {
+            } else if newX > collectionView.frame.size.width {
                 newX = collectionView.frame.origin.x + collectionView.frame.size.width
             }
+            
             if abs(previousHapticX - newX) > 10 {
                 FeedbackGenerator.shared.fire(for: .heavy)
                 previousHapticX = newX
@@ -135,7 +186,7 @@ class ViewController: UIViewController {
         switch recognizer.state {
         case .began:
             FeedbackGenerator.shared.fire(for: .heavy)
-            let touchPoint = recognizer.location(in: view)
+            let touchPoint = recognizer.location(in: collectionView)
             leadingPlayheadConstraint.constant = touchPoint.x
             
         case .ended:
@@ -151,54 +202,18 @@ class ViewController: UIViewController {
         
         switch recognizer.state {
         case .ended:
-            if let indexPath = collectionView.indexPathForItem(at: touchPoint) {
-
-                let row = indexPath.row
-                let split = splits[row]
-                selectedSplit = split
-                isLooping = true
-
-                playMusic(shouldSwitch: false, loop: true, from: split.startTime, to: split.endTime)
-            }
+            playSplitIfPossible(at: touchPoint)
         case .began, .possible, .cancelled, .failed, .changed: break
         @unknown default: break
         }
     }
     
+    // MARK: - IBActions
     @IBAction func playPauseTap(_ sender: UITapGestureRecognizer) {
         playMusic(shouldSwitch: true)
     }
     
-    func setupPlaybackTimer() {
-        if playbackTimer == nil {
-            let timeInterval = 0.05
-            
-            playbackTimer = Timer.scheduledTimer(withTimeInterval: timeInterval, repeats: true) { [weak self ]timer in
-                guard let self = self, self.player.isPlaying else { return }
-
-                // Simply use the currentTime of the player and multiply to extrapolate across the full width of the collection view
-                let maxWidth = self.collectionView.frame.width
-                let multiplier = Double(maxWidth) / self.player.duration
-                
-                // Update playhead position
-                let newConstant = self.originalPlayheadLeadingConstant + CGFloat(multiplier * Float(self.player.currentTime))
-                self.leadingPlayheadConstraint.constant = newConstant
-                
-                // Update position on UISlider
-                self.timeSlider.value = Float(self.player.currentTime)
-                
-                // Update text on time strings
-                self.updateTimeStrings()
-            }
-        }
-    }
-    
-    // Only gets triggered when user interacts with this
-    @IBAction func timerSliderChanged(_ sender: UISlider) {
-        print("My value is: \(sender.value)")
-    }
-    
-    func playMusic(shouldSwitch: Bool, loop: Bool = false, from: Double? = nil, to: Double? = nil) {
+    private func playMusic(shouldSwitch: Bool, loop: Bool = false, from: Double? = nil, to: Double? = nil) {
         defer {
             isLooping = loop
             
@@ -233,51 +248,17 @@ class ViewController: UIViewController {
             let currentPosition = leadingPlayheadConstraint.constant - collectionView.frame.origin.x
             let currentTime = currentPosition / maxWidth * CGFloat(player.duration)
             
-            timeSlider.value = Float(currentTime)
             startLabel.text = createTimeString(time: Float(currentTime))
             
             player.setPosition(Double(currentTime))
             return
         }
-        
-        
-        timeSlider.value = Float(from)
+                
         startLabel.text = createTimeString(time: Float(from))
         
     }
     
-    
-    func setupPlayer() {
-        let path = Bundle.main.path(forResource: "zemlja", ofType: "mp3")!
-        let url = URL(fileURLWithPath: path)
-        
-        player = AKPlayer(url: url)
-        
-        player.buffering = .always
-        player.completionHandler = { [weak self] in
-            guard let self = self,
-                  let split = self.selectedSplit, self.isLooping else { return }
-            
-            self.player.play(from: split.startTime, to: split.endTime)
-        }
-        
-        AKManager.output = player
-        try! AKManager.start()
-        
-        let newDurationSeconds = Float(player.duration)
-        let currentTime = Float(CMTimeGetSeconds(CMTime(seconds: player.currentTime, preferredTimescale: 1)))
-        
-        timeSlider.minimumValue = currentTime
-        timeSlider.maximumValue = newDurationSeconds
-        
-        let fullSplit = Split(startTime: 0.0, endTime: player.duration)
-        splits.append(fullSplit)
-        collectionView.reloadData()
-        
-        updateTimeStrings()
-    }
-    
-    func updateTimeStrings() {
+    private func updateTimeStrings() {
         let newDurationSeconds = Float(player.duration)
         let currentTime = Float(CMTimeGetSeconds(CMTime(seconds: player.currentTime, preferredTimescale: 1)))
         
@@ -285,8 +266,7 @@ class ViewController: UIViewController {
         endLabel.text = createTimeString(time: newDurationSeconds)
     }
     
-    @IBAction func split(_ sender: Any) {
-        
+    private func splitTrack() {
         if let indexPath = indexPathAtPlayheadPoint {
 
             let row = indexPath.row
@@ -301,6 +281,18 @@ class ViewController: UIViewController {
         
         collectionView.reloadData()
     }
+    
+    private func playSplitIfPossible(at touchLocation: CGPoint) {
+        if let indexPath = collectionView.indexPathForItem(at: touchLocation) {
+
+            let row = indexPath.row
+            let split = splits[row]
+            selectedSplit = split
+            isLooping = true
+
+            playMusic(shouldSwitch: false, loop: true, from: split.startTime, to: split.endTime)
+        }
+    }
 }
 
 // MARK: - Collection View Delegate
@@ -309,9 +301,10 @@ extension ViewController: UICollectionViewDelegate { }
 // MARK: Gesture Recognizer
 extension ViewController: UIGestureRecognizerDelegate {
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
-        if let longPress = gestureRecognizer as? UILongPressGestureRecognizer,
-           let pan = otherGestureRecognizer as? UIPanGestureRecognizer {
-            print("This was a longPress + pan")
+        if let _ = gestureRecognizer as? UILongPressGestureRecognizer,
+           let _ = otherGestureRecognizer as? UIPanGestureRecognizer {
+            
+            // User did pan after long press, prefer pan
             return true
         } else {
             return false
