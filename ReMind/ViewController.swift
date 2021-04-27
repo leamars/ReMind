@@ -61,6 +61,9 @@ class ViewController: UIViewController {
     
     var panGestureRecognizer = UIPanGestureRecognizer()
     
+    // Haptics
+    private var hapticGenerator = HapticGenerator()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -89,6 +92,7 @@ class ViewController: UIViewController {
         
         previousHapticX = leadingPlayheadConstraint.constant
         originalPlayheadLeadingConstant = leadingPlayheadConstraint.constant
+        
     }
     
     @objc func handleTap(recognizer: UITapGestureRecognizer) {
@@ -100,7 +104,9 @@ class ViewController: UIViewController {
         player.stop()
         
         switch recognizer.state {
-        case .began, .changed:
+        case .began: return
+            //hapticGenerator?.fireContinuous()
+        case .changed:
             let touchPoint = recognizer.location(in: view)
             var newX = touchPoint.x
             if newX < collectionView.frame.origin.x {
@@ -108,7 +114,6 @@ class ViewController: UIViewController {
             } else if newX > collectionView.frame.origin.x + collectionView.frame.size.width {
                 newX = collectionView.frame.origin.x + collectionView.frame.size.width
             }
-            print("Haptics: \(previousHapticX) - \(newX) = \(abs(previousHapticX - newX))")
             if abs(previousHapticX - newX) > 10 {
                 FeedbackGenerator.shared.fire(for: .heavy)
                 previousHapticX = newX
@@ -117,6 +122,7 @@ class ViewController: UIViewController {
             leadingPlayheadConstraint.constant = newX
         case .ended:
             playMusic(shouldSwitch: false)
+            //hapticGenerator?.stop()
             
         case .possible, .cancelled, .failed: break
         @unknown default: break

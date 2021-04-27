@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6778AD7426386C4B000B0307 /* HapticManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6778AD7326386C4B000B0307 /* HapticManager.swift */; };
 		67902A312636CBF70090FDA1 /* PassthroughView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67902A302636CBF70090FDA1 /* PassthroughView.swift */; };
 		67943838262EFC6700ADA064 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67943837262EFC6700ADA064 /* AppDelegate.swift */; };
 		6794383A262EFC6700ADA064 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67943839262EFC6700ADA064 /* SceneDelegate.swift */; };
@@ -29,6 +30,7 @@
 
 /* Begin PBXFileReference section */
 		29E1F43AD72A63D9D76FF530 /* Pods-ReMind.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReMind.debug.xcconfig"; path = "Target Support Files/Pods-ReMind/Pods-ReMind.debug.xcconfig"; sourceTree = "<group>"; };
+		6778AD7326386C4B000B0307 /* HapticManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticManager.swift; sourceTree = "<group>"; };
 		67902A302636CBF70090FDA1 /* PassthroughView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassthroughView.swift; sourceTree = "<group>"; };
 		67943834262EFC6700ADA064 /* ReMind.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ReMind.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		67943837262EFC6700ADA064 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -98,6 +100,7 @@
 				67AEFC8A263059290058AF18 /* HapticGenerator.swift */,
 				67AEFCBB263059890058AF18 /* FeedbackGenerator.swift */,
 				67902A302636CBF70090FDA1 /* PassthroughView.swift */,
+				6778AD7326386C4B000B0307 /* HapticManager.swift */,
 			);
 			path = ReMind;
 			sourceTree = "<group>";
@@ -241,6 +244,7 @@
 				67AEFC8B263059290058AF18 /* HapticGenerator.swift in Sources */,
 				67943863262F0F9600ADA064 /* Split.swift in Sources */,
 				6794383A262EFC6700ADA064 /* SceneDelegate.swift in Sources */,
+				6778AD7426386C4B000B0307 /* HapticManager.swift in Sources */,
 				67943867262F305600ADA064 /* SplitCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
