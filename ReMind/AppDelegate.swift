@@ -2,7 +2,7 @@
 //  AppDelegate.swift
 //  ReMind
 //
-//  Created by Lea Marolt Sonnenschein on 29/12/2020.
+//  Created by Lea Marolt Sonnenschein on 20/04/2021.
 //
 
 import UIKit

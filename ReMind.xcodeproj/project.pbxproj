@@ -7,137 +7,142 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		B6CD388B259B873400B3CB2C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6CD388A259B873400B3CB2C /* AppDelegate.swift */; };
-		B6CD388D259B873400B3CB2C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6CD388C259B873400B3CB2C /* SceneDelegate.swift */; };
-		B6CD388F259B873400B3CB2C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6CD388E259B873400B3CB2C /* ViewController.swift */; };
-		B6CD3892259B873400B3CB2C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B6CD3890259B873400B3CB2C /* Main.storyboard */; };
-		B6CD3894259B873500B3CB2C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B6CD3893259B873500B3CB2C /* Assets.xcassets */; };
-		B6CD3897259B873500B3CB2C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B6CD3895259B873500B3CB2C /* LaunchScreen.storyboard */; };
-		B6CD38A2259B873600B3CB2C /* ReMindTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6CD38A1259B873600B3CB2C /* ReMindTests.swift */; };
-		B6CD38AD259B873600B3CB2C /* ReMindUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6CD38AC259B873600B3CB2C /* ReMindUITests.swift */; };
+		67902A312636CBF70090FDA1 /* PassthroughView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67902A302636CBF70090FDA1 /* PassthroughView.swift */; };
+		67943838262EFC6700ADA064 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67943837262EFC6700ADA064 /* AppDelegate.swift */; };
+		6794383A262EFC6700ADA064 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67943839262EFC6700ADA064 /* SceneDelegate.swift */; };
+		6794383C262EFC6700ADA064 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6794383B262EFC6700ADA064 /* ViewController.swift */; };
+		6794383F262EFC6700ADA064 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6794383D262EFC6700ADA064 /* Main.storyboard */; };
+		67943841262EFC6800ADA064 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 67943840262EFC6800ADA064 /* Assets.xcassets */; };
+		67943844262EFC6800ADA064 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 67943842262EFC6800ADA064 /* LaunchScreen.storyboard */; };
+		6794385A262EFE6100ADA064 /* cuk.wav in Resources */ = {isa = PBXBuildFile; fileRef = 67943854262EFE6000ADA064 /* cuk.wav */; };
+		6794385B262EFE6100ADA064 /* p1.wav in Resources */ = {isa = PBXBuildFile; fileRef = 67943855262EFE6000ADA064 /* p1.wav */; };
+		6794385C262EFE6100ADA064 /* z1.wav in Resources */ = {isa = PBXBuildFile; fileRef = 67943856262EFE6000ADA064 /* z1.wav */; };
+		6794385D262EFE6100ADA064 /* m1.wav in Resources */ = {isa = PBXBuildFile; fileRef = 67943857262EFE6000ADA064 /* m1.wav */; };
+		6794385E262EFE6100ADA064 /* zemlja.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 67943858262EFE6000ADA064 /* zemlja.mp3 */; };
+		6794385F262EFE6100ADA064 /* v1.wav in Resources */ = {isa = PBXBuildFile; fileRef = 67943859262EFE6000ADA064 /* v1.wav */; };
+		67943863262F0F9600ADA064 /* Split.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67943862262F0F9600ADA064 /* Split.swift */; };
+		67943867262F305600ADA064 /* SplitCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67943866262F305600ADA064 /* SplitCell.swift */; };
+		67AEFC8B263059290058AF18 /* HapticGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67AEFC8A263059290058AF18 /* HapticGenerator.swift */; };
+		67AEFCBC263059890058AF18 /* FeedbackGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67AEFCBB263059890058AF18 /* FeedbackGenerator.swift */; };
+		FFF0F307FAB71A55879218C7 /* Pods_ReMind.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CAAECFDC996CF90F5155D3D /* Pods_ReMind.framework */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		B6CD389E259B873600B3CB2C /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = B6CD387F259B873400B3CB2C /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = B6CD3886259B873400B3CB2C;
-			remoteInfo = ReMind;
-		};
-		B6CD38A9259B873600B3CB2C /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = B6CD387F259B873400B3CB2C /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = B6CD3886259B873400B3CB2C;
-			remoteInfo = ReMind;
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXFileReference section */
-		B6CD3887259B873400B3CB2C /* ReMind.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ReMind.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		B6CD388A259B873400B3CB2C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		B6CD388C259B873400B3CB2C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		B6CD388E259B873400B3CB2C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		B6CD3891259B873400B3CB2C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		B6CD3893259B873500B3CB2C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		B6CD3896259B873500B3CB2C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		B6CD3898259B873500B3CB2C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		B6CD389D259B873600B3CB2C /* ReMindTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ReMindTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		B6CD38A1259B873600B3CB2C /* ReMindTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReMindTests.swift; sourceTree = "<group>"; };
-		B6CD38A3259B873600B3CB2C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		B6CD38A8259B873600B3CB2C /* ReMindUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ReMindUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		B6CD38AC259B873600B3CB2C /* ReMindUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReMindUITests.swift; sourceTree = "<group>"; };
-		B6CD38AE259B873600B3CB2C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		29E1F43AD72A63D9D76FF530 /* Pods-ReMind.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReMind.debug.xcconfig"; path = "Target Support Files/Pods-ReMind/Pods-ReMind.debug.xcconfig"; sourceTree = "<group>"; };
+		67902A302636CBF70090FDA1 /* PassthroughView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassthroughView.swift; sourceTree = "<group>"; };
+		67943834262EFC6700ADA064 /* ReMind.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ReMind.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		67943837262EFC6700ADA064 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		67943839262EFC6700ADA064 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		6794383B262EFC6700ADA064 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		6794383E262EFC6700ADA064 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		67943840262EFC6800ADA064 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		67943843262EFC6800ADA064 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		67943845262EFC6800ADA064 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		67943854262EFE6000ADA064 /* cuk.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = cuk.wav; sourceTree = "<group>"; };
+		67943855262EFE6000ADA064 /* p1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = p1.wav; sourceTree = "<group>"; };
+		67943856262EFE6000ADA064 /* z1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = z1.wav; sourceTree = "<group>"; };
+		67943857262EFE6000ADA064 /* m1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = m1.wav; sourceTree = "<group>"; };
+		67943858262EFE6000ADA064 /* zemlja.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = zemlja.mp3; sourceTree = "<group>"; };
+		67943859262EFE6000ADA064 /* v1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = v1.wav; sourceTree = "<group>"; };
+		67943862262F0F9600ADA064 /* Split.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Split.swift; sourceTree = "<group>"; };
+		67943866262F305600ADA064 /* SplitCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplitCell.swift; sourceTree = "<group>"; };
+		67AEFC8A263059290058AF18 /* HapticGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticGenerator.swift; sourceTree = "<group>"; };
+		67AEFCBB263059890058AF18 /* FeedbackGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackGenerator.swift; sourceTree = "<group>"; };
+		7314103116BF6E9527B0FF8B /* Pods-ReMind.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReMind.release.xcconfig"; path = "Target Support Files/Pods-ReMind/Pods-ReMind.release.xcconfig"; sourceTree = "<group>"; };
+		8CAAECFDC996CF90F5155D3D /* Pods_ReMind.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ReMind.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		B6CD3884259B873400B3CB2C /* Frameworks */ = {
+		67943831262EFC6700ADA064 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		B6CD389A259B873600B3CB2C /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		B6CD38A5259B873600B3CB2C /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
+				FFF0F307FAB71A55879218C7 /* Pods_ReMind.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		B6CD387E259B873300B3CB2C = {
+		6794382B262EFC6700ADA064 = {
 			isa = PBXGroup;
 			children = (
-				B6CD3889259B873400B3CB2C /* ReMind */,
-				B6CD38A0259B873600B3CB2C /* ReMindTests */,
-				B6CD38AB259B873600B3CB2C /* ReMindUITests */,
-				B6CD3888259B873400B3CB2C /* Products */,
+				67943836262EFC6700ADA064 /* ReMind */,
+				67943835262EFC6700ADA064 /* Products */,
+				6884309CD928810207BB2F1C /* Pods */,
+				903C1F0BD6536FF0236EAB86 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
-		B6CD3888259B873400B3CB2C /* Products */ = {
+		67943835262EFC6700ADA064 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				B6CD3887259B873400B3CB2C /* ReMind.app */,
-				B6CD389D259B873600B3CB2C /* ReMindTests.xctest */,
-				B6CD38A8259B873600B3CB2C /* ReMindUITests.xctest */,
+				67943834262EFC6700ADA064 /* ReMind.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		B6CD3889259B873400B3CB2C /* ReMind */ = {
+		67943836262EFC6700ADA064 /* ReMind */ = {
 			isa = PBXGroup;
 			children = (
-				B6CD388A259B873400B3CB2C /* AppDelegate.swift */,
-				B6CD388C259B873400B3CB2C /* SceneDelegate.swift */,
-				B6CD388E259B873400B3CB2C /* ViewController.swift */,
-				B6CD3890259B873400B3CB2C /* Main.storyboard */,
-				B6CD3893259B873500B3CB2C /* Assets.xcassets */,
-				B6CD3895259B873500B3CB2C /* LaunchScreen.storyboard */,
-				B6CD3898259B873500B3CB2C /* Info.plist */,
+				67943853262EFE5900ADA064 /* Sounds */,
+				67943837262EFC6700ADA064 /* AppDelegate.swift */,
+				67943839262EFC6700ADA064 /* SceneDelegate.swift */,
+				6794383B262EFC6700ADA064 /* ViewController.swift */,
+				67943862262F0F9600ADA064 /* Split.swift */,
+				6794383D262EFC6700ADA064 /* Main.storyboard */,
+				67943840262EFC6800ADA064 /* Assets.xcassets */,
+				67943842262EFC6800ADA064 /* LaunchScreen.storyboard */,
+				67943845262EFC6800ADA064 /* Info.plist */,
+				67943866262F305600ADA064 /* SplitCell.swift */,
+				67AEFC8A263059290058AF18 /* HapticGenerator.swift */,
+				67AEFCBB263059890058AF18 /* FeedbackGenerator.swift */,
+				67902A302636CBF70090FDA1 /* PassthroughView.swift */,
 			);
 			path = ReMind;
 			sourceTree = "<group>";
 		};
-		B6CD38A0259B873600B3CB2C /* ReMindTests */ = {
+		67943853262EFE5900ADA064 /* Sounds */ = {
 			isa = PBXGroup;
 			children = (
-				B6CD38A1259B873600B3CB2C /* ReMindTests.swift */,
-				B6CD38A3259B873600B3CB2C /* Info.plist */,
+				67943854262EFE6000ADA064 /* cuk.wav */,
+				67943857262EFE6000ADA064 /* m1.wav */,
+				67943855262EFE6000ADA064 /* p1.wav */,
+				67943859262EFE6000ADA064 /* v1.wav */,
+				67943856262EFE6000ADA064 /* z1.wav */,
+				67943858262EFE6000ADA064 /* zemlja.mp3 */,
 			);
-			path = ReMindTests;
+			path = Sounds;
 			sourceTree = "<group>";
 		};
-		B6CD38AB259B873600B3CB2C /* ReMindUITests */ = {
+		6884309CD928810207BB2F1C /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				B6CD38AC259B873600B3CB2C /* ReMindUITests.swift */,
-				B6CD38AE259B873600B3CB2C /* Info.plist */,
+				29E1F43AD72A63D9D76FF530 /* Pods-ReMind.debug.xcconfig */,
+				7314103116BF6E9527B0FF8B /* Pods-ReMind.release.xcconfig */,
 			);
-			path = ReMindUITests;
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		903C1F0BD6536FF0236EAB86 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				8CAAECFDC996CF90F5155D3D /* Pods_ReMind.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		B6CD3886259B873400B3CB2C /* ReMind */ = {
+		67943833262EFC6700ADA064 /* ReMind */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = B6CD38B1259B873600B3CB2C /* Build configuration list for PBXNativeTarget "ReMind" */;
+			buildConfigurationList = 67943848262EFC6800ADA064 /* Build configuration list for PBXNativeTarget "ReMind" */;
 			buildPhases = (
-				B6CD3883259B873400B3CB2C /* Sources */,
-				B6CD3884259B873400B3CB2C /* Frameworks */,
-				B6CD3885259B873400B3CB2C /* Resources */,
+				1D8C7BBA73E8149ED5679D30 /* [CP] Check Pods Manifest.lock */,
+				67943830262EFC6700ADA064 /* Sources */,
+				67943831262EFC6700ADA064 /* Frameworks */,
+				67943832262EFC6700ADA064 /* Resources */,
 			);
 			buildRules = (
 			);
@@ -145,68 +150,24 @@
 			);
 			name = ReMind;
 			productName = ReMind;
-			productReference = B6CD3887259B873400B3CB2C /* ReMind.app */;
+			productReference = 67943834262EFC6700ADA064 /* ReMind.app */;
 			productType = "com.apple.product-type.application";
-		};
-		B6CD389C259B873600B3CB2C /* ReMindTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = B6CD38B4259B873600B3CB2C /* Build configuration list for PBXNativeTarget "ReMindTests" */;
-			buildPhases = (
-				B6CD3899259B873600B3CB2C /* Sources */,
-				B6CD389A259B873600B3CB2C /* Frameworks */,
-				B6CD389B259B873600B3CB2C /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				B6CD389F259B873600B3CB2C /* PBXTargetDependency */,
-			);
-			name = ReMindTests;
-			productName = ReMindTests;
-			productReference = B6CD389D259B873600B3CB2C /* ReMindTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
-		B6CD38A7259B873600B3CB2C /* ReMindUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = B6CD38B7259B873600B3CB2C /* Build configuration list for PBXNativeTarget "ReMindUITests" */;
-			buildPhases = (
-				B6CD38A4259B873600B3CB2C /* Sources */,
-				B6CD38A5259B873600B3CB2C /* Frameworks */,
-				B6CD38A6259B873600B3CB2C /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				B6CD38AA259B873600B3CB2C /* PBXTargetDependency */,
-			);
-			name = ReMindUITests;
-			productName = ReMindUITests;
-			productReference = B6CD38A8259B873600B3CB2C /* ReMindUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		B6CD387F259B873400B3CB2C /* Project object */ = {
+		6794382C262EFC6700ADA064 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1210;
-				LastUpgradeCheck = 1210;
+				LastSwiftUpdateCheck = 1240;
+				LastUpgradeCheck = 1240;
 				TargetAttributes = {
-					B6CD3886259B873400B3CB2C = {
-						CreatedOnToolsVersion = 12.1;
-					};
-					B6CD389C259B873600B3CB2C = {
-						CreatedOnToolsVersion = 12.1;
-						TestTargetID = B6CD3886259B873400B3CB2C;
-					};
-					B6CD38A7259B873600B3CB2C = {
-						CreatedOnToolsVersion = 12.1;
-						TestTargetID = B6CD3886259B873400B3CB2C;
+					67943833262EFC6700ADA064 = {
+						CreatedOnToolsVersion = 12.4;
 					};
 				};
 			};
-			buildConfigurationList = B6CD3882259B873400B3CB2C /* Build configuration list for PBXProject "ReMind" */;
+			buildConfigurationList = 6794382F262EFC6700ADA064 /* Build configuration list for PBXProject "ReMind" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -214,100 +175,91 @@
 				en,
 				Base,
 			);
-			mainGroup = B6CD387E259B873300B3CB2C;
-			productRefGroup = B6CD3888259B873400B3CB2C /* Products */;
+			mainGroup = 6794382B262EFC6700ADA064;
+			productRefGroup = 67943835262EFC6700ADA064 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				B6CD3886259B873400B3CB2C /* ReMind */,
-				B6CD389C259B873600B3CB2C /* ReMindTests */,
-				B6CD38A7259B873600B3CB2C /* ReMindUITests */,
+				67943833262EFC6700ADA064 /* ReMind */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		B6CD3885259B873400B3CB2C /* Resources */ = {
+		67943832262EFC6700ADA064 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B6CD3897259B873500B3CB2C /* LaunchScreen.storyboard in Resources */,
-				B6CD3894259B873500B3CB2C /* Assets.xcassets in Resources */,
-				B6CD3892259B873400B3CB2C /* Main.storyboard in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		B6CD389B259B873600B3CB2C /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		B6CD38A6259B873600B3CB2C /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
+				6794385B262EFE6100ADA064 /* p1.wav in Resources */,
+				67943844262EFC6800ADA064 /* LaunchScreen.storyboard in Resources */,
+				67943841262EFC6800ADA064 /* Assets.xcassets in Resources */,
+				6794385E262EFE6100ADA064 /* zemlja.mp3 in Resources */,
+				6794385C262EFE6100ADA064 /* z1.wav in Resources */,
+				6794385A262EFE6100ADA064 /* cuk.wav in Resources */,
+				6794383F262EFC6700ADA064 /* Main.storyboard in Resources */,
+				6794385D262EFE6100ADA064 /* m1.wav in Resources */,
+				6794385F262EFE6100ADA064 /* v1.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		1D8C7BBA73E8149ED5679D30 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-ReMind-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
-		B6CD3883259B873400B3CB2C /* Sources */ = {
+		67943830262EFC6700ADA064 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B6CD388F259B873400B3CB2C /* ViewController.swift in Sources */,
-				B6CD388B259B873400B3CB2C /* AppDelegate.swift in Sources */,
-				B6CD388D259B873400B3CB2C /* SceneDelegate.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		B6CD3899259B873600B3CB2C /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				B6CD38A2259B873600B3CB2C /* ReMindTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		B6CD38A4259B873600B3CB2C /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				B6CD38AD259B873600B3CB2C /* ReMindUITests.swift in Sources */,
+				6794383C262EFC6700ADA064 /* ViewController.swift in Sources */,
+				67AEFCBC263059890058AF18 /* FeedbackGenerator.swift in Sources */,
+				67943838262EFC6700ADA064 /* AppDelegate.swift in Sources */,
+				67902A312636CBF70090FDA1 /* PassthroughView.swift in Sources */,
+				67AEFC8B263059290058AF18 /* HapticGenerator.swift in Sources */,
+				67943863262F0F9600ADA064 /* Split.swift in Sources */,
+				6794383A262EFC6700ADA064 /* SceneDelegate.swift in Sources */,
+				67943867262F305600ADA064 /* SplitCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
-/* Begin PBXTargetDependency section */
-		B6CD389F259B873600B3CB2C /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = B6CD3886259B873400B3CB2C /* ReMind */;
-			targetProxy = B6CD389E259B873600B3CB2C /* PBXContainerItemProxy */;
-		};
-		B6CD38AA259B873600B3CB2C /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = B6CD3886259B873400B3CB2C /* ReMind */;
-			targetProxy = B6CD38A9259B873600B3CB2C /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
-
 /* Begin PBXVariantGroup section */
-		B6CD3890259B873400B3CB2C /* Main.storyboard */ = {
+		6794383D262EFC6700ADA064 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				B6CD3891259B873400B3CB2C /* Base */,
+				6794383E262EFC6700ADA064 /* Base */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
-		B6CD3895259B873500B3CB2C /* LaunchScreen.storyboard */ = {
+		67943842262EFC6800ADA064 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				B6CD3896259B873500B3CB2C /* Base */,
+				67943843262EFC6800ADA064 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -315,7 +267,7 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		B6CD38AF259B873600B3CB2C /* Debug */ = {
+		67943846262EFC6800ADA064 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -366,7 +318,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -376,7 +328,7 @@
 			};
 			name = Debug;
 		};
-		B6CD38B0259B873600B3CB2C /* Release */ = {
+		67943847262EFC6800ADA064 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -421,7 +373,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -431,12 +383,14 @@
 			};
 			name = Release;
 		};
-		B6CD38B2259B873600B3CB2C /* Debug */ = {
+		67943849262EFC6800ADA064 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 29E1F43AD72A63D9D76FF530 /* Pods-ReMind.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 2HG8AL7F4U;
 				INFOPLIST_FILE = ReMind/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -449,12 +403,14 @@
 			};
 			name = Debug;
 		};
-		B6CD38B3259B873600B3CB2C /* Release */ = {
+		6794384A262EFC6800ADA064 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7314103116BF6E9527B0FF8B /* Pods-ReMind.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 2HG8AL7F4U;
 				INFOPLIST_FILE = ReMind/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -464,129 +420,31 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Release;
-		};
-		B6CD38B5259B873600B3CB2C /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = ReMindTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.elemes.ReMindTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ReMind.app/ReMind";
-			};
-			name = Debug;
-		};
-		B6CD38B6259B873600B3CB2C /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = ReMindTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.elemes.ReMindTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ReMind.app/ReMind";
-			};
-			name = Release;
-		};
-		B6CD38B8259B873600B3CB2C /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = ReMindUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.elemes.ReMindUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = ReMind;
-			};
-			name = Debug;
-		};
-		B6CD38B9259B873600B3CB2C /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = ReMindUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.elemes.ReMindUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = ReMind;
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		B6CD3882259B873400B3CB2C /* Build configuration list for PBXProject "ReMind" */ = {
+		6794382F262EFC6700ADA064 /* Build configuration list for PBXProject "ReMind" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				B6CD38AF259B873600B3CB2C /* Debug */,
-				B6CD38B0259B873600B3CB2C /* Release */,
+				67943846262EFC6800ADA064 /* Debug */,
+				67943847262EFC6800ADA064 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		B6CD38B1259B873600B3CB2C /* Build configuration list for PBXNativeTarget "ReMind" */ = {
+		67943848262EFC6800ADA064 /* Build configuration list for PBXNativeTarget "ReMind" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				B6CD38B2259B873600B3CB2C /* Debug */,
-				B6CD38B3259B873600B3CB2C /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		B6CD38B4259B873600B3CB2C /* Build configuration list for PBXNativeTarget "ReMindTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				B6CD38B5259B873600B3CB2C /* Debug */,
-				B6CD38B6259B873600B3CB2C /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		B6CD38B7259B873600B3CB2C /* Build configuration list for PBXNativeTarget "ReMindUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				B6CD38B8259B873600B3CB2C /* Debug */,
-				B6CD38B9259B873600B3CB2C /* Release */,
+				67943849262EFC6800ADA064 /* Debug */,
+				6794384A262EFC6800ADA064 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = B6CD387F259B873400B3CB2C /* Project object */;
+	rootObject = 6794382C262EFC6700ADA064 /* Project object */;
 }
