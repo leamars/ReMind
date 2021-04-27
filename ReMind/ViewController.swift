@@ -58,9 +58,7 @@ class ViewController: UIViewController {
     
     // Gesture recognizers
     @IBOutlet var playTapGesture: UITapGestureRecognizer!
-    
-    var panGestureRecognizer = UIPanGestureRecognizer()
-    
+        
     // Haptics
     private var hapticGenerator = HapticGenerator()
     
@@ -68,12 +66,23 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         setupPlayer()
+        setupGestureRecognizers()
+        setupPlaybackTimer()
         
+        timeSlider.value = 0
+        collectionView.automaticallyAdjustsScrollIndicatorInsets = false
+        
+        
+        previousHapticX = leadingPlayheadConstraint.constant
+        originalPlayheadLeadingConstant = leadingPlayheadConstraint.constant
+    }
+    
+    private func setupGestureRecognizers() {
         let longPress = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress(recognizer:)))
         collectionView.addGestureRecognizer(longPress)
         longPress.delegate = self
         
-        panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(handlePan(recognizer:)))
+        let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(handlePan(recognizer:)))
         collectionView.addGestureRecognizer(panGestureRecognizer)
         
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTap(recognizer:)))
@@ -84,17 +93,9 @@ class ViewController: UIViewController {
         collectionView.addGestureRecognizer(doubleTap)
         
         tapGestureRecognizer.require(toFail: doubleTap)
-        
-        timeSlider.value = 0
-        collectionView.automaticallyAdjustsScrollIndicatorInsets = false
-        
-        setupPlaybackTimer()
-        
-        previousHapticX = leadingPlayheadConstraint.constant
-        originalPlayheadLeadingConstant = leadingPlayheadConstraint.constant
-        
     }
     
+    // MARK: - Gesture recognizers
     @objc func handleTap(recognizer: UITapGestureRecognizer) {
         FeedbackGenerator.shared.fire(for: .heavy)
         playMusic(shouldSwitch: true)
