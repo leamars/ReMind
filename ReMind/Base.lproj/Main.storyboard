@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina6_1" orientation="landscape" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
@@ -131,11 +131,55 @@
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YIM-rZ-zOD" userLabel="Speed">
                                 <rect key="frame" x="8" y="0.0" width="288" height="128"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0po-Vm-QyW">
+                                        <rect key="frame" x="52" y="39.5" width="30" height="49"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="49" id="fuD-WB-4yk"/>
+                                            <constraint firstAttribute="width" constant="30" id="rvi-ze-O5L"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
+                                        <state key="normal" title="-"/>
+                                        <connections>
+                                            <action selector="turnRateDown:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Xhb-lT-lHF"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vys-T8-Wng">
+                                        <rect key="frame" x="197" y="40" width="30" height="49"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="30" id="aDK-LO-tfc"/>
+                                            <constraint firstAttribute="height" constant="49" id="kny-c8-JsT"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
+                                        <state key="normal" title="+"/>
+                                        <connections>
+                                            <action selector="turnRateUp:" destination="BYZ-38-t0r" eventType="touchUpInside" id="3CT-WD-7rD"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
                                 <color key="backgroundColor" systemColor="systemGray6Color"/>
+                                <constraints>
+                                    <constraint firstItem="0po-Vm-QyW" firstAttribute="centerY" secondItem="YIM-rZ-zOD" secondAttribute="centerY" id="5Ip-r5-1v7"/>
+                                    <constraint firstItem="vys-T8-Wng" firstAttribute="centerY" secondItem="YIM-rZ-zOD" secondAttribute="centerY" id="cHL-j8-s6O"/>
+                                    <constraint firstAttribute="trailing" secondItem="vys-T8-Wng" secondAttribute="trailing" constant="61" id="eBF-Vt-3qz"/>
+                                    <constraint firstItem="0po-Vm-QyW" firstAttribute="leading" secondItem="YIM-rZ-zOD" secondAttribute="leading" constant="52" id="fvG-RT-k7I"/>
+                                </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xrF-kd-4U8" userLabel="Cut">
                                 <rect key="frame" x="600" y="0.0" width="288" height="128"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1x" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lzn-vo-kjn">
+                                        <rect key="frame" x="129" y="45.5" width="30" height="37"/>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
                                 <color key="backgroundColor" systemColor="systemGray6Color"/>
+                                <constraints>
+                                    <constraint firstItem="Lzn-vo-kjn" firstAttribute="centerX" secondItem="xrF-kd-4U8" secondAttribute="centerX" id="YVZ-qZ-T0O"/>
+                                    <constraint firstItem="Lzn-vo-kjn" firstAttribute="centerY" secondItem="xrF-kd-4U8" secondAttribute="centerY" id="fsd-O1-kz0"/>
+                                </constraints>
                             </view>
                             <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="h2r-8e-osE">
                                 <rect key="frame" x="196" y="284" width="504" height="31"/>
@@ -197,6 +241,7 @@
                         <outlet property="playHead" destination="1LT-3K-iQs" id="1iP-o7-y0q"/>
                         <outlet property="playPauseImageView" destination="qNu-Kp-qqR" id="EK7-fl-2lm"/>
                         <outlet property="playTapGesture" destination="DEd-7S-PZm" id="Cxj-nx-iKO"/>
+                        <outlet property="speedLabel" destination="Lzn-vo-kjn" id="uP1-yh-MXN"/>
                         <outlet property="startLabel" destination="qkp-FA-6rx" id="YbS-2q-hel"/>
                         <outlet property="timeSlider" destination="h2r-8e-osE" id="D4F-om-1K5"/>
                     </connections>
