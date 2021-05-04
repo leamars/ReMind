@@ -26,6 +26,9 @@
 		67AEFC8B263059290058AF18 /* HapticGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67AEFC8A263059290058AF18 /* HapticGenerator.swift */; };
 		67AEFCBC263059890058AF18 /* FeedbackGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67AEFCBB263059890058AF18 /* FeedbackGenerator.swift */; };
 		67D33081264045B200F9D8C5 /* HotelSong.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 67D33080264045B200F9D8C5 /* HotelSong.mp3 */; };
+		67D330842640972200F9D8C5 /* Speechless_Full.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 67D330822640972200F9D8C5 /* Speechless_Full.mp3 */; };
+		67D330852640972200F9D8C5 /* Speechless_Piano.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 67D330832640972200F9D8C5 /* Speechless_Piano.mp3 */; };
+		67D3308726409A7900F9D8C5 /* Speechless_MIDI.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 67D3308626409A7900F9D8C5 /* Speechless_MIDI.mp3 */; };
 		FFF0F307FAB71A55879218C7 /* Pods_ReMind.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CAAECFDC996CF90F5155D3D /* Pods_ReMind.framework */; };
 /* End PBXBuildFile section */
 
@@ -52,6 +55,9 @@
 		67AEFC8A263059290058AF18 /* HapticGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticGenerator.swift; sourceTree = "<group>"; };
 		67AEFCBB263059890058AF18 /* FeedbackGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackGenerator.swift; sourceTree = "<group>"; };
 		67D33080264045B200F9D8C5 /* HotelSong.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = HotelSong.mp3; sourceTree = "<group>"; };
+		67D330822640972200F9D8C5 /* Speechless_Full.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Speechless_Full.mp3; sourceTree = "<group>"; };
+		67D330832640972200F9D8C5 /* Speechless_Piano.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Speechless_Piano.mp3; sourceTree = "<group>"; };
+		67D3308626409A7900F9D8C5 /* Speechless_MIDI.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Speechless_MIDI.mp3; sourceTree = "<group>"; };
 		7314103116BF6E9527B0FF8B /* Pods-ReMind.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReMind.release.xcconfig"; path = "Target Support Files/Pods-ReMind/Pods-ReMind.release.xcconfig"; sourceTree = "<group>"; };
 		8CAAECFDC996CF90F5155D3D /* Pods_ReMind.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ReMind.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -117,6 +123,9 @@
 				67943856262EFE6000ADA064 /* z1.wav */,
 				67943858262EFE6000ADA064 /* zemlja.mp3 */,
 				67D33080264045B200F9D8C5 /* HotelSong.mp3 */,
+				67D330822640972200F9D8C5 /* Speechless_Full.mp3 */,
+				67D330832640972200F9D8C5 /* Speechless_Piano.mp3 */,
+				67D3308626409A7900F9D8C5 /* Speechless_MIDI.mp3 */,
 			);
 			path = Sounds;
 			sourceTree = "<group>";
@@ -197,11 +206,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				67D33081264045B200F9D8C5 /* HotelSong.mp3 in Resources */,
+				67D3308726409A7900F9D8C5 /* Speechless_MIDI.mp3 in Resources */,
 				6794385B262EFE6100ADA064 /* p1.wav in Resources */,
 				67943844262EFC6800ADA064 /* LaunchScreen.storyboard in Resources */,
 				67943841262EFC6800ADA064 /* Assets.xcassets in Resources */,
 				6794385E262EFE6100ADA064 /* zemlja.mp3 in Resources */,
+				67D330842640972200F9D8C5 /* Speechless_Full.mp3 in Resources */,
 				6794385C262EFE6100ADA064 /* z1.wav in Resources */,
+				67D330852640972200F9D8C5 /* Speechless_Piano.mp3 in Resources */,
 				6794385A262EFE6100ADA064 /* cuk.wav in Resources */,
 				6794383F262EFC6700ADA064 /* Main.storyboard in Resources */,
 				6794385D262EFE6100ADA064 /* m1.wav in Resources */,

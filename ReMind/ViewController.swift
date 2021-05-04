@@ -49,14 +49,14 @@ class ViewController: UIViewController {
     
     var previousHapticX: CGFloat = 0
     
-    let timeRemainingFormatter: DateComponentsFormatter = {
+    private let timeRemainingFormatter: DateComponentsFormatter = {
         let formatter = DateComponentsFormatter()
         formatter.zeroFormattingBehavior = .pad
         formatter.allowedUnits = [.minute, .second]
         return formatter
     }()
     
-    var indexPathAtPlayheadPoint: IndexPath? {
+    private var indexPathAtPlayheadPoint: IndexPath? {
         // If we only have 1 item, it's the full thing, so we need to split it in multiple
         // The end will be player.currentTime, and the start will be 0
         
@@ -65,6 +65,11 @@ class ViewController: UIViewController {
         let splitPoint = CGPoint(x: playHeadPointX, y: collectionViewY)
         
         return collectionView.indexPathForItem(at: splitPoint)
+    }
+    
+    private var indexOfSelectedSplit: Int? {
+        guard let currentSplit = selectedSplit else { return nil }
+        return splits.firstIndex(where: { $0.startTime == currentSplit.startTime })
     }
     
     // Gesture recognizers
@@ -124,7 +129,7 @@ class ViewController: UIViewController {
     }
     
     private func setupPlayer() {
-        let path = Bundle.main.path(forResource: "HotelSong", ofType: "mp3")!
+        let path = Bundle.main.path(forResource: "Speechless_Piano", ofType: "mp3")!
         let url = URL(fileURLWithPath: path)
         
         player = AKPlayer(url: url)
@@ -346,16 +351,16 @@ class ViewController: UIViewController {
     
     private func combineLoopingSplitWithNext() {
         if let selectedSplit = selectedSplit, isLooping,
-           let indexOfSelectedSplit = splits.firstIndex(where: { $0.startTime == selectedSplit.startTime }),
-           splits.count > indexOfSelectedSplit + 1 {
+           let splitIndex = indexOfSelectedSplit,
+           splits.count > splitIndex + 1 {
             
-            let nextSplit = splits[indexOfSelectedSplit+1]
+            let nextSplit = splits[splitIndex+1]
             let combinedSplit = Split(startTime: selectedSplit.startTime, endTime: nextSplit.endTime)
             
-            splits.remove(at: indexOfSelectedSplit)
-            splits.remove(at: indexOfSelectedSplit)
+            splits.remove(at: splitIndex)
+            splits.remove(at: splitIndex)
             
-            splits.insert(combinedSplit, at: indexOfSelectedSplit)
+            splits.insert(combinedSplit, at: splitIndex)
             
             self.selectedSplit = combinedSplit
             playMusic(shouldSwitch: false, loop: true, from: combinedSplit.startTime, to: combinedSplit.endTime)
@@ -400,6 +405,9 @@ class ViewController: UIViewController {
         changeTime(by: -0.1)
     }
     
+    @IBAction func split(_ sender: Any) {
+        splitTrack()
+    }
     
     // Only gets triggered when user interacts with this
     @IBAction func timerSliderChanged(_ sender: UISlider) {
@@ -454,11 +462,6 @@ class ViewController: UIViewController {
         
     }
     
-    // MARK: - IBActions
-    @IBAction func split(_ sender: Any) {
-        splitTrack()
-    }
-    
     private func updateTimeStrings() {
             let newDurationSeconds = Float(player.duration)
             let currentTime = Float(CMTimeGetSeconds(CMTime(seconds: player.currentTime, preferredTimescale: 1)))
@@ -495,11 +498,54 @@ class ViewController: UIViewController {
         }
     }
     
+    private func playNextSplitIfPossible() {
+        guard let currentIndex = indexOfSelectedSplit else { return }
+        
+        if currentIndex + 1 < splits.count {
+            let nextIndex = currentIndex + 1
+            let nextSplit = splits[nextIndex]
+            selectedSplit = nextSplit
+            isLooping = true
+
+            playMusic(shouldSwitch: false, loop: true, from: nextSplit.startTime, to: nextSplit.endTime)
+        }
+    }
+    
+    private func playPreviousSplitIfPossible() {
+        guard let currentIndex = indexOfSelectedSplit else { return }
+        
+        if currentIndex - 1 >= 0 && !splits.isEmpty {
+            let previousIndex = currentIndex - 1
+            let previousSplit = splits[previousIndex]
+            selectedSplit = previousSplit
+            isLooping = true
+
+            playMusic(shouldSwitch: false, loop: true, from: previousSplit.startTime, to: previousSplit.endTime)
+        }
+    }
+    
     private func changeTime(by delta: Double) {
         timePitch.rate = timePitch.rate + delta
         
         let numString = String(format: "%.1f", timePitch.rate)
         speedLabel.text = "\(numString)x"
+    }
+    
+    private func clearSplits() {
+        guard let last = splits.last else { return }
+        let fullSplit = Split(startTime: 0.0, endTime: last.endTime)
+        splits = [fullSplit]
+        collectionView.reloadData()
+    }
+    
+    private func back(by seconds: Double) {
+        player.pause()
+        player.play(from: player.currentTime - seconds)
+    }
+    
+    private func forward(by seconds: Double) {
+        player.pause()
+        player.play(from: player.currentTime + seconds)
     }
 }
 
