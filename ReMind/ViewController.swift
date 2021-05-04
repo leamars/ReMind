@@ -34,14 +34,21 @@ class ViewController: UIViewController {
     
     // UI components
     @IBOutlet weak var collectionView: UICollectionView!
-    @IBOutlet weak var playPauseImageView: UIImageView!
-    @IBOutlet weak var timeSlider: UISlider!
     @IBOutlet weak var startLabel: UILabel!
     @IBOutlet weak var endLabel: UILabel!
     @IBOutlet weak var speedLabel: UILabel!
     
     @IBOutlet weak var leadingPlayheadConstraint: NSLayoutConstraint!
     @IBOutlet weak var playHead: UIView!
+    
+    @IBOutlet weak var fasterBtn: UIButton!
+    @IBOutlet weak var slowerBtn: UIButton!
+    @IBOutlet weak var splitBtn: UIButton!
+    @IBOutlet weak var playPauseBtn: UIButton!
+    @IBOutlet weak var loopBtn: UIButton!
+    @IBOutlet weak var clearBtn: UIButton!
+    @IBOutlet weak var leftPanel: UIView!
+    @IBOutlet weak var rightPanel: UIView!
     
     private var originalPlayheadLeadingConstant: CGFloat = 0.0
     
@@ -84,15 +91,108 @@ class ViewController: UIViewController {
         setupPlayer()
         setupGestureRecognizers()
         setupPlaybackTimer()
+        
         setupSpeechRecognition()
         
-        timeSlider.value = 0
+        setupLeftPanelGestures()
+        setupRightPanelGestures()
+        
         collectionView.automaticallyAdjustsScrollIndicatorInsets = false
         
         previousHapticX = leadingPlayheadConstraint.constant
         originalPlayheadLeadingConstant = leadingPlayheadConstraint.constant
         
         collectionView.isScrollEnabled = false
+    }
+    
+    private func setupLeftPanelGestures() {
+        // Skip back 3 seconds
+        let doubleTap = UITapGestureRecognizer(target: self, action:  #selector(leftPanelDoubleTap(recognizer:)))
+        doubleTap.numberOfTapsRequired = 2
+        leftPanel.addGestureRecognizer(doubleTap)
+        
+        let singleTap = UITapGestureRecognizer(target: self, action:  #selector(leftPanelSingleTap(recognizer:)))
+        leftPanel.addGestureRecognizer(singleTap)
+        
+        let swipeUp = UISwipeGestureRecognizer(target: self, action: #selector(leftSwipeUp(recognizer:)))
+        swipeUp.numberOfTouchesRequired = 1
+        swipeUp.direction = .up
+        swipeUp.delegate = self
+        leftPanel.addGestureRecognizer(swipeUp)
+        
+        let swipeDown = UISwipeGestureRecognizer(target: self, action: #selector(leftSwipeDown(recognizer:)))
+        swipeDown.numberOfTouchesRequired = 1
+        swipeDown.direction = .down
+        swipeDown.delegate = self
+        leftPanel.addGestureRecognizer(swipeDown)
+    }
+    
+    @objc func leftPanelDoubleTap(recognizer: UILongPressGestureRecognizer) {
+        switch recognizer.state {
+        case .ended:
+            back(by: 3)
+        case .began, .possible, .cancelled, .failed, .changed: break
+        @unknown default: break
+        }
+    }
+    
+    @objc func leftPanelSingleTap(recognizer: UILongPressGestureRecognizer) {
+        switch recognizer.state {
+        case .ended:
+            playMusic(shouldSwitch: true)
+        case .began, .possible, .cancelled, .failed, .changed: break
+        @unknown default: break
+        }
+    }
+    
+    @objc func leftSwipeUp(recognizer: UISwipeGestureRecognizer) {
+        hapticGenerator?.fireFunkyPattern()
+        handleSwipe(recognizer: recognizer)
+    }
+    
+    @objc func leftSwipeDown(recognizer: UISwipeGestureRecognizer) {
+        hapticGenerator?.fireFunkyPattern()
+        handleSwipe(recognizer: recognizer)
+    }
+    
+    private func setupRightPanelGestures() {
+        // Skip forward 3 seconds
+        let doubleTap = UITapGestureRecognizer(target: self, action:  #selector(rightPanelDoubleTap(recognizer:)))
+        doubleTap.numberOfTapsRequired = 2
+        rightPanel.addGestureRecognizer(doubleTap)
+        
+        let singleTap = UITapGestureRecognizer(target: self, action:  #selector(rightPanelSingleTap(recognizer:)))
+        rightPanel.addGestureRecognizer(singleTap)
+        
+        let swipeUp = UISwipeGestureRecognizer(target: self, action: #selector(leftSwipeUp(recognizer:)))
+        swipeUp.numberOfTouchesRequired = 1
+        swipeUp.direction = .up
+        swipeUp.delegate = self
+        rightPanel.addGestureRecognizer(swipeUp)
+        
+        let swipeDown = UISwipeGestureRecognizer(target: self, action: #selector(leftSwipeDown(recognizer:)))
+        swipeDown.numberOfTouchesRequired = 1
+        swipeDown.direction = .down
+        swipeDown.delegate = self
+        rightPanel.addGestureRecognizer(swipeDown)
+    }
+    
+    @objc func rightPanelDoubleTap(recognizer: UILongPressGestureRecognizer) {
+        switch recognizer.state {
+        case .ended:
+            forward(by: 3)
+        case .began, .possible, .cancelled, .failed, .changed: break
+        @unknown default: break
+        }
+    }
+    
+    @objc func rightPanelSingleTap(recognizer: UILongPressGestureRecognizer) {
+        switch recognizer.state {
+        case .ended:
+            playMusic(shouldSwitch: true)
+        case .began, .possible, .cancelled, .failed, .changed: break
+        @unknown default: break
+        }
     }
     
     private func setupGestureRecognizers() {
@@ -149,10 +249,7 @@ class ViewController: UIViewController {
         
         let newDurationSeconds = Float(player.duration)
         let currentTime = Float(CMTimeGetSeconds(CMTime(seconds: player.currentTime, preferredTimescale: 1)))
-        
-        timeSlider.minimumValue = currentTime
-        timeSlider.maximumValue = newDurationSeconds
-        
+                
         let fullSplit = Split(startTime: 0.0, endTime: player.duration)
         splits.append(fullSplit)
         collectionView.reloadData()
@@ -175,9 +272,6 @@ class ViewController: UIViewController {
                 let newConstant = self.originalPlayheadLeadingConstant + CGFloat(multiplier * Float(self.player.currentTime))
                 self.leadingPlayheadConstraint.constant = newConstant
                 
-                // Update position on UISlider
-                self.timeSlider.value = Float(self.player.currentTime)
-                
                 // Update text on time strings
                 self.updateTimeStrings()
             }
@@ -186,7 +280,11 @@ class ViewController: UIViewController {
     
     private func setupSpeechRecognition() {
         try! AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category.playAndRecord,
-                                                         options: [AVAudioSession.CategoryOptions.defaultToSpeaker, .allowBluetoothA2DP, .allowAirPlay])
+                                                         options: [AVAudioSession.CategoryOptions.defaultToSpeaker,
+                                                                   .allowBluetoothA2DP,
+                                                                   .allowAirPlay])
+        
+        try! AVAudioSession.sharedInstance().setAllowHapticsAndSystemSoundsDuringRecording(true)
         
         SFSpeechRecognizer.requestAuthorization {
           [unowned self] (authStatus) in
@@ -388,15 +486,16 @@ class ViewController: UIViewController {
             case .left, .right: break
             default: break
             }
-        case .began, .possible, .cancelled, .failed, .changed: break
+        case .possible, .cancelled, .failed, .changed: break
         @unknown default: break
         }
     }
     
     // MARK: - IBActions
-    @IBAction func playPauseTap(_ sender: UITapGestureRecognizer) {
+    @IBAction func playPause(_ sender: Any) {
         playMusic(shouldSwitch: true)
     }
+    
     @IBAction func turnRateUp(_ sender: Any) {
         changeTime(by: 0.1)
     }
@@ -407,6 +506,18 @@ class ViewController: UIViewController {
     
     @IBAction func split(_ sender: Any) {
         splitTrack()
+    }
+    
+    @IBAction func loop(_ sender: Any) {
+        if selectedSplit == nil {
+            selectedSplit = splits.first
+        }
+        
+        playCurrentSplit()
+    }
+    
+    @IBAction func clearSplits(_ sender: Any) {
+        clearSplits()
     }
     
     // Only gets triggered when user interacts with this
@@ -436,11 +547,7 @@ class ViewController: UIViewController {
                 player.play(from: from, to: to)
             }
             
-            if player.isPlaying {
-                playPauseImageView.image = #imageLiteral(resourceName: "pause")
-            } else {
-                playPauseImageView.image = #imageLiteral(resourceName: "play")
-            }
+            updatePlayButtonText()
         }
         
         let maxWidth = self.collectionView.frame.width
@@ -449,17 +556,21 @@ class ViewController: UIViewController {
             let currentPosition = leadingPlayheadConstraint.constant - collectionView.frame.origin.x
             let currentTime = currentPosition / maxWidth * CGFloat(player.duration)
             
-            timeSlider.value = Float(currentTime)
             startLabel.text = createTimeString(time: Float(currentTime))
             
             player.setPosition(Double(currentTime))
             return
         }
         
-        
-        timeSlider.value = Float(from)
         startLabel.text = createTimeString(time: Float(from))
+    }
+    
+    private func updatePlayButtonText() {
+        let text = player.isPlaying ? "Pause" : "Play"
         
+        playPauseBtn.setTitle(text, for: .normal)
+        playPauseBtn.setTitle(text, for: .selected)
+        playPauseBtn.setTitle(text, for: .highlighted)
     }
     
     private func updateTimeStrings() {
@@ -498,6 +609,13 @@ class ViewController: UIViewController {
         }
     }
     
+    private func playCurrentSplit() {
+        guard let selectedSplit = selectedSplit else { return }
+        
+        isLooping = true
+        playMusic(shouldSwitch: false, loop: true, from: selectedSplit.startTime, to: selectedSplit.endTime)
+    }
+    
     private func playNextSplitIfPossible() {
         guard let currentIndex = indexOfSelectedSplit else { return }
         
@@ -527,7 +645,7 @@ class ViewController: UIViewController {
     private func changeTime(by delta: Double) {
         timePitch.rate = timePitch.rate + delta
         
-        let numString = String(format: "%.1f", timePitch.rate)
+        let numString = String(format: "Speed: %.1f", timePitch.rate)
         speedLabel.text = "\(numString)x"
     }
     
