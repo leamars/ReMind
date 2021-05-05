@@ -105,6 +105,10 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="U8j-Xr-tpu" userLabel="Panel">
+                                <rect key="frame" x="0.0" y="0.0" width="690" height="414"/>
+                                <color key="backgroundColor" red="1" green="0.80000000000000004" blue="0.0" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
+                            </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Speed: 1.0x" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lzn-vo-kjn">
                                 <rect key="frame" x="754" y="40" width="98" height="23"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
@@ -206,14 +210,6 @@
                                     </button>
                                 </subviews>
                             </stackView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="U8j-Xr-tpu">
-                                <rect key="frame" x="0.0" y="0.0" width="345" height="414"/>
-                                <color key="backgroundColor" red="1" green="0.80000000000000004" blue="0.0" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
-                            </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TsR-Tb-GWF">
-                                <rect key="frame" x="345" y="0.0" width="345" height="414"/>
-                                <color key="backgroundColor" red="0.68627450980392157" green="0.32156862745098042" blue="0.87058823529411766" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
-                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -223,11 +219,10 @@
                             <constraint firstItem="qkp-FA-6rx" firstAttribute="top" secondItem="1LT-3K-iQs" secondAttribute="bottom" constant="9" id="DNR-zN-BUZ"/>
                             <constraint firstItem="plC-PG-bN3" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="Etc-Mq-uDe"/>
                             <constraint firstItem="U8j-Xr-tpu" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" id="IE1-QL-mzb"/>
-                            <constraint firstItem="TsR-Tb-GWF" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" multiplier="0.5" id="IJR-Fq-Xau"/>
                             <constraint firstItem="U8j-Xr-tpu" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="Mv2-h2-aiD"/>
-                            <constraint firstItem="U8j-Xr-tpu" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" multiplier="0.5" id="SKG-dI-J0Q"/>
+                            <constraint firstItem="U8j-Xr-tpu" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" constant="44" id="PdG-rV-5uk"/>
+                            <constraint firstItem="U8j-Xr-tpu" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="SKG-dI-J0Q"/>
                             <constraint firstItem="erH-Zp-73W" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="Srx-ek-Ht4"/>
-                            <constraint firstItem="TsR-Tb-GWF" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" id="U8b-1g-TSa"/>
                             <constraint firstItem="fYa-2z-hob" firstAttribute="trailing" secondItem="plC-PG-bN3" secondAttribute="trailing" constant="-10" id="Zbp-rU-DKP"/>
                             <constraint firstItem="qkp-FA-6rx" firstAttribute="leading" secondItem="plC-PG-bN3" secondAttribute="leading" constant="10" id="gO4-VU-89t"/>
                             <constraint firstItem="plC-PG-bN3" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="gWD-SH-ZGU"/>
@@ -235,8 +230,6 @@
                             <constraint firstItem="plC-PG-bN3" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="iwf-Ff-cVb"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="leading" secondItem="U8j-Xr-tpu" secondAttribute="leading" constant="44" id="kBM-Od-LnH"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="leading" secondItem="plC-PG-bN3" secondAttribute="leading" id="lal-Ez-AgP"/>
-                            <constraint firstItem="TsR-Tb-GWF" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="oQP-18-f05"/>
-                            <constraint firstItem="TsR-Tb-GWF" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" constant="44" id="pPu-W6-ZAR"/>
                             <constraint firstItem="erH-Zp-73W" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="xzE-Ih-Q3Z"/>
                             <constraint firstItem="erH-Zp-73W" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" constant="8" id="yfV-6Z-u2X"/>
                             <constraint firstItem="fYa-2z-hob" firstAttribute="top" secondItem="1LT-3K-iQs" secondAttribute="bottom" constant="9" id="zUo-Eo-1md"/>
@@ -248,12 +241,11 @@
                         <outlet property="endLabel" destination="fYa-2z-hob" id="QOO-AU-UtX"/>
                         <outlet property="fasterBtn" destination="91G-7E-pRY" id="5SO-La-xvI"/>
                         <outlet property="leadingPlayheadConstraint" destination="fQF-NX-RIW" id="ezH-0t-tQy"/>
-                        <outlet property="leftPanel" destination="U8j-Xr-tpu" id="mgw-91-jZ4"/>
                         <outlet property="loopBtn" destination="1A8-qW-KFy" id="uou-jj-Gpy"/>
+                        <outlet property="panel" destination="U8j-Xr-tpu" id="9YH-Uh-jfC"/>
                         <outlet property="playHead" destination="1LT-3K-iQs" id="1iP-o7-y0q"/>
                         <outlet property="playPauseBtn" destination="dJ3-HB-UwH" id="Hnu-zD-ekY"/>
                         <outlet property="playTapGesture" destination="DEd-7S-PZm" id="Cxj-nx-iKO"/>
-                        <outlet property="rightPanel" destination="TsR-Tb-GWF" id="lXk-kZ-Vz4"/>
                         <outlet property="slowerBtn" destination="DBB-pw-lqi" id="2Uz-hs-ufK"/>
                         <outlet property="speedLabel" destination="Lzn-vo-kjn" id="uP1-yh-MXN"/>
                         <outlet property="splitBtn" destination="nC9-ZX-UlJ" id="GMq-em-iXJ"/>

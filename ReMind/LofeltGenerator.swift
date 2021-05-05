@@ -26,6 +26,8 @@ enum Pattern: String {
     //case alert5 - this is double
     case approval // Pretty strong
     case arise // Cancel or go back?
+    case transitionLeft
+    case transitionRight
     
     var fileName: String {
         return self.rawValue

@@ -51,8 +51,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var playPauseBtn: UIButton!
     @IBOutlet weak var loopBtn: UIButton!
     @IBOutlet weak var clearBtn: UIButton!
-    @IBOutlet weak var leftPanel: UIView!
-    @IBOutlet weak var rightPanel: UIView!
+    @IBOutlet weak var panel: UIView!
     
     private var originalPlayheadLeadingConstant: CGFloat = 0.0
     
@@ -78,6 +77,8 @@ class ViewController: UIViewController {
         return collectionView.indexPathForItem(at: splitPoint)
     }
     
+    private var indexPathBeingTouched: IndexPath?
+    
     private var indexOfSelectedSplit: Int? {
         guard let currentSplit = selectedSplit else { return nil }
         return splits.firstIndex(where: { $0.startTime == currentSplit.startTime })
@@ -98,8 +99,8 @@ class ViewController: UIViewController {
 
         setupSpeechRecognition()
 
-        setupLeftPanelGestures()
-        setupRightPanelGestures()
+        setupPanelGestures()
+        //setupRightPanelGestures()
 
         collectionView.automaticallyAdjustsScrollIndicatorInsets = false
 
@@ -109,40 +110,54 @@ class ViewController: UIViewController {
         collectionView.isScrollEnabled = false
     }
     
-    private func setupLeftPanelGestures() {
+    private func setupPanelGestures() {
         // Skip back 3 seconds
-        let twoFingerDoubleTap = UITapGestureRecognizer(target: self, action:  #selector(leftPanelTwoFingerDoubleTap(recognizer:)))
+        let twoFingerDoubleTap = UITapGestureRecognizer(target: self, action:  #selector(panelTwoFingerDoubleTap(recognizer:)))
         twoFingerDoubleTap.numberOfTouchesRequired = 2
         twoFingerDoubleTap.numberOfTapsRequired = 2
-        leftPanel.addGestureRecognizer(twoFingerDoubleTap)
+        panel.addGestureRecognizer(twoFingerDoubleTap)
         
-        let singleTap = UITapGestureRecognizer(target: self, action:  #selector(leftPanelSingleTap(recognizer:)))
-        leftPanel.addGestureRecognizer(singleTap)
+        let singleTap = UITapGestureRecognizer(target: self, action:  #selector(panelSingleTap(recognizer:)))
+        panel.addGestureRecognizer(singleTap)
         
-        let swipeUp = UISwipeGestureRecognizer(target: self, action: #selector(leftSwipeUp(recognizer:)))
+        let swipeUp = UISwipeGestureRecognizer(target: self, action: #selector(panelSwipeUp(recognizer:)))
         swipeUp.numberOfTouchesRequired = 1
         swipeUp.direction = .up
         swipeUp.delegate = self
-        leftPanel.addGestureRecognizer(swipeUp)
+        panel.addGestureRecognizer(swipeUp)
         
-        let swipeDown = UISwipeGestureRecognizer(target: self, action: #selector(leftSwipeDown(recognizer:)))
+        let swipeDown = UISwipeGestureRecognizer(target: self, action: #selector(panelSwipeDown(recognizer:)))
         swipeDown.numberOfTouchesRequired = 1
         swipeDown.direction = .down
         swipeDown.delegate = self
-        leftPanel.addGestureRecognizer(swipeDown)
+        panel.addGestureRecognizer(swipeDown)
+        
+        let longPress = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress(recognizer:)))
+        panel.addGestureRecognizer(longPress)
+        longPress.delegate = self
+        
+        let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(handlePan(recognizer:)))
+        panel.addGestureRecognizer(panGestureRecognizer)
     }
     
-    @objc func leftPanelTwoFingerDoubleTap(recognizer: UILongPressGestureRecognizer) {
+    @objc func panelTwoFingerDoubleTap(recognizer: UILongPressGestureRecognizer) {
         lofeltGenerator.play(pattern: .airPop)
+        let touchPoint = recognizer.location(in: panel)
+        let inLeftPanel = touchPoint.x < panel.frame.size.width/2
+        
         switch recognizer.state {
         case .ended:
-            back(by: 3)
+            if inLeftPanel {
+                back(by: 3)
+            } else {
+                forward(by: 3)
+            }
         case .began, .possible, .cancelled, .failed, .changed: break
         @unknown default: break
         }
     }
     
-    @objc func leftPanelSingleTap(recognizer: UILongPressGestureRecognizer) {
+    @objc func panelSingleTap(recognizer: UILongPressGestureRecognizer) {
         lofeltGenerator.play(pattern: .tab2)
         switch recognizer.state {
         case .ended:
@@ -152,56 +167,25 @@ class ViewController: UIViewController {
         }
     }
     
-    @objc func leftSwipeUp(recognizer: UISwipeGestureRecognizer) {
+    @objc func panelSwipeUp(recognizer: UISwipeGestureRecognizer) {
         hapticGenerator?.fireSwipePattern()
         handleSwipe(recognizer: recognizer)
     }
     
-    @objc func leftSwipeDown(recognizer: UISwipeGestureRecognizer) {
+    @objc func panelSwipeDown(recognizer: UISwipeGestureRecognizer) {
         hapticGenerator?.fireSwipePattern()
         handleSwipe(recognizer: recognizer)
     }
     
-    private func setupRightPanelGestures() {
-        // Skip forward 3 seconds
-        let twoFingerDoubleTap = UITapGestureRecognizer(target: self, action:  #selector(rightPanelTwoFingerDoubleTap(recognizer:)))
-        twoFingerDoubleTap.numberOfTouchesRequired = 2
-        twoFingerDoubleTap.numberOfTapsRequired = 2
-        rightPanel.addGestureRecognizer(twoFingerDoubleTap)
+    @objc func panelLongPress(recognizer: UILongPressGestureRecognizer) {
+        player.stop()
         
-        let singleTap = UITapGestureRecognizer(target: self, action:  #selector(rightPanelSingleTap(recognizer:)))
-        singleTap.numberOfTapsRequired = 1
-        rightPanel.addGestureRecognizer(singleTap)
-        
-        let swipeUp = UISwipeGestureRecognizer(target: self, action: #selector(leftSwipeUp(recognizer:)))
-        swipeUp.numberOfTouchesRequired = 1
-        swipeUp.direction = .up
-        swipeUp.delegate = self
-        rightPanel.addGestureRecognizer(swipeUp)
-        
-        let swipeDown = UISwipeGestureRecognizer(target: self, action: #selector(leftSwipeDown(recognizer:)))
-        swipeDown.numberOfTouchesRequired = 1
-        swipeDown.direction = .down
-        swipeDown.delegate = self
-        rightPanel.addGestureRecognizer(swipeDown)
-    }
-    
-    @objc func rightPanelTwoFingerDoubleTap(recognizer: UILongPressGestureRecognizer) {
-        lofeltGenerator.play(pattern: .airPop)
         switch recognizer.state {
+        case .began: return
         case .ended:
-            forward(by: 3)
-        case .began, .possible, .cancelled, .failed, .changed: break
-        @unknown default: break
-        }
-    }
-    
-    @objc func rightPanelSingleTap(recognizer: UILongPressGestureRecognizer) {
-        lofeltGenerator.play(pattern: .tab2)
-        switch recognizer.state {
-        case .ended:
-            playMusic(shouldSwitch: true)
-        case .began, .possible, .cancelled, .failed, .changed: break
+            panel.backgroundColor = .clear
+            
+        case .possible, .cancelled, .failed, .changed: break
         @unknown default: break
         }
     }
@@ -390,24 +374,41 @@ class ViewController: UIViewController {
         playMusic(shouldSwitch: true)
     }
     
-    @objc func handlePan(recognizer: UILongPressGestureRecognizer) {
+    @objc func handlePan(recognizer: UIPanGestureRecognizer) {
         player.stop()
         
         switch recognizer.state {
         case .began: return
             //hapticGenerator?.fireContinuous()
         case .changed:
-            let touchPoint = recognizer.location(in: view)
-            var newX = touchPoint.x
+            let touchPoint = recognizer.location(in: panel)
+            let convertedTouchPoint = panel.convert(touchPoint, to: collectionView)
+            var newX = convertedTouchPoint.x
             if newX < collectionView.frame.origin.x {
                 newX = collectionView.frame.origin.x
             } else if newX > collectionView.frame.origin.x + collectionView.frame.size.width {
                 newX = collectionView.frame.origin.x + collectionView.frame.size.width
             }
-            if abs(previousHapticX - newX) > 10 {
-                FeedbackGenerator.shared.fire(for: .heavy)
+            
+            // Play feedback when user's finger crosses an indexPath's line to indicate a new segment
+            if let currentIndexPath = indexPathBeingTouched,
+               let playheadIndexPath = indexPathAtPlayheadPoint {
+                if currentIndexPath.row != playheadIndexPath.row {
+                    // Play feedback
+                    FeedbackGenerator.shared.fire(for: .heavy)
+                    // Assign new indexPath
+                    indexPathBeingTouched = indexPathAtPlayheadPoint
+                }
+            } else {
+                indexPathBeingTouched = indexPathAtPlayheadPoint
+            }
+                        
+            if abs(previousHapticX - newX) > 20 {
+                FeedbackGenerator.shared.fire(for: .light)
                 previousHapticX = newX
             }
+            
+            // Only fire haptic if we've crossed over into a new indexPath
             
             leadingPlayheadConstraint.constant = newX
         case .ended:
@@ -425,8 +426,9 @@ class ViewController: UIViewController {
         switch recognizer.state {
         case .began:
             FeedbackGenerator.shared.fire(for: .heavy)
-            let touchPoint = recognizer.location(in: view)
-            leadingPlayheadConstraint.constant = touchPoint.x
+            let touchPoint = recognizer.location(in: panel)
+            let convertedTouchPoint = panel.convert(touchPoint, to: collectionView)
+            leadingPlayheadConstraint.constant = convertedTouchPoint.x
             
         case .ended:
             playMusic(shouldSwitch: false)
