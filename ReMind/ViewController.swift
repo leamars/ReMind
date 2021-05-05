@@ -10,6 +10,7 @@ import AudioKit
 import AudioKitUI
 import Speech
 import AVFoundation
+import LofeltHaptics
 
 enum PlaybackState {
     case moving
@@ -17,6 +18,9 @@ enum PlaybackState {
 }
 
 class ViewController: UIViewController {
+    
+    // Need to keep this guy here and alive, otherwise the audio/haptic engines become null
+    let lofeltGenerator = LofeltGenerator()
     
     // Speech Recognition
     let audioEngine = AVAudioEngine()
@@ -91,17 +95,17 @@ class ViewController: UIViewController {
         setupPlayer()
         setupGestureRecognizers()
         setupPlaybackTimer()
-        
+
         setupSpeechRecognition()
-        
+
         setupLeftPanelGestures()
         setupRightPanelGestures()
-        
+
         collectionView.automaticallyAdjustsScrollIndicatorInsets = false
-        
+
         previousHapticX = leadingPlayheadConstraint.constant
         originalPlayheadLeadingConstant = leadingPlayheadConstraint.constant
-        
+
         collectionView.isScrollEnabled = false
     }
     
@@ -137,12 +141,14 @@ class ViewController: UIViewController {
     }
     
     @objc func leftPanelSingleTap(recognizer: UILongPressGestureRecognizer) {
-        switch recognizer.state {
-        case .ended:
-            playMusic(shouldSwitch: true)
-        case .began, .possible, .cancelled, .failed, .changed: break
-        @unknown default: break
-        }
+        let lofelt = LofeltGenerator()
+        lofelt.playPattern()
+//        switch recognizer.state {
+//        case .ended:
+//            playMusic(shouldSwitch: true)
+//        case .began, .possible, .cancelled, .failed, .changed: break
+//        @unknown default: break
+//        }
     }
     
     @objc func leftSwipeUp(recognizer: UISwipeGestureRecognizer) {

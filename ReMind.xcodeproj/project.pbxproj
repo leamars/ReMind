@@ -23,6 +23,11 @@
 		6794385F262EFE6100ADA064 /* v1.wav in Resources */ = {isa = PBXBuildFile; fileRef = 67943859262EFE6000ADA064 /* v1.wav */; };
 		67943863262F0F9600ADA064 /* Split.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67943862262F0F9600ADA064 /* Split.swift */; };
 		67943867262F305600ADA064 /* SplitCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67943866262F305600ADA064 /* SplitCell.swift */; };
+		67954979264243D500B4D1C3 /* LofeltHaptics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 67D330882641E09400F9D8C5 /* LofeltHaptics.framework */; };
+		6795497A264243D500B4D1C3 /* LofeltHaptics.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 67D330882641E09400F9D8C5 /* LofeltHaptics.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		67954983264245CC00B4D1C3 /* pop.haptic in Resources */ = {isa = PBXBuildFile; fileRef = 67954982264245CC00B4D1C3 /* pop.haptic */; };
+		67954987264246CF00B4D1C3 /* LofeltGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67954986264246CF00B4D1C3 /* LofeltGenerator.swift */; };
+		6795498C26424D0000B4D1C3 /* HapticsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6795498B26424D0000B4D1C3 /* HapticsViewController.swift */; };
 		67AEFC8B263059290058AF18 /* HapticGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67AEFC8A263059290058AF18 /* HapticGenerator.swift */; };
 		67AEFCBC263059890058AF18 /* FeedbackGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67AEFCBB263059890058AF18 /* FeedbackGenerator.swift */; };
 		67D33081264045B200F9D8C5 /* HotelSong.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 67D33080264045B200F9D8C5 /* HotelSong.mp3 */; };
@@ -31,6 +36,20 @@
 		67D3308726409A7900F9D8C5 /* Speechless_MIDI.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 67D3308626409A7900F9D8C5 /* Speechless_MIDI.mp3 */; };
 		FFF0F307FAB71A55879218C7 /* Pods_ReMind.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CAAECFDC996CF90F5155D3D /* Pods_ReMind.framework */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		6795497B264243D500B4D1C3 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				6795497A264243D500B4D1C3 /* LofeltHaptics.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		29E1F43AD72A63D9D76FF530 /* Pods-ReMind.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReMind.debug.xcconfig"; path = "Target Support Files/Pods-ReMind/Pods-ReMind.debug.xcconfig"; sourceTree = "<group>"; };
@@ -52,12 +71,16 @@
 		67943859262EFE6000ADA064 /* v1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = v1.wav; sourceTree = "<group>"; };
 		67943862262F0F9600ADA064 /* Split.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Split.swift; sourceTree = "<group>"; };
 		67943866262F305600ADA064 /* SplitCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplitCell.swift; sourceTree = "<group>"; };
+		67954982264245CC00B4D1C3 /* pop.haptic */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = pop.haptic; sourceTree = "<group>"; };
+		67954986264246CF00B4D1C3 /* LofeltGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LofeltGenerator.swift; sourceTree = "<group>"; };
+		6795498B26424D0000B4D1C3 /* HapticsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticsViewController.swift; sourceTree = "<group>"; };
 		67AEFC8A263059290058AF18 /* HapticGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticGenerator.swift; sourceTree = "<group>"; };
 		67AEFCBB263059890058AF18 /* FeedbackGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackGenerator.swift; sourceTree = "<group>"; };
 		67D33080264045B200F9D8C5 /* HotelSong.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = HotelSong.mp3; sourceTree = "<group>"; };
 		67D330822640972200F9D8C5 /* Speechless_Full.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Speechless_Full.mp3; sourceTree = "<group>"; };
 		67D330832640972200F9D8C5 /* Speechless_Piano.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Speechless_Piano.mp3; sourceTree = "<group>"; };
 		67D3308626409A7900F9D8C5 /* Speechless_MIDI.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Speechless_MIDI.mp3; sourceTree = "<group>"; };
+		67D330882641E09400F9D8C5 /* LofeltHaptics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = LofeltHaptics.framework; sourceTree = "<group>"; };
 		7314103116BF6E9527B0FF8B /* Pods-ReMind.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReMind.release.xcconfig"; path = "Target Support Files/Pods-ReMind/Pods-ReMind.release.xcconfig"; sourceTree = "<group>"; };
 		8CAAECFDC996CF90F5155D3D /* Pods_ReMind.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ReMind.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -68,6 +91,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FFF0F307FAB71A55879218C7 /* Pods_ReMind.framework in Frameworks */,
+				67954979264243D500B4D1C3 /* LofeltHaptics.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -95,10 +119,12 @@
 		67943836262EFC6700ADA064 /* ReMind */ = {
 			isa = PBXGroup;
 			children = (
+				6795497C2642450B00B4D1C3 /* Lofelt Haptics */,
 				67943853262EFE5900ADA064 /* Sounds */,
 				67943837262EFC6700ADA064 /* AppDelegate.swift */,
 				67943839262EFC6700ADA064 /* SceneDelegate.swift */,
 				6794383B262EFC6700ADA064 /* ViewController.swift */,
+				6795498B26424D0000B4D1C3 /* HapticsViewController.swift */,
 				67943862262F0F9600ADA064 /* Split.swift */,
 				6794383D262EFC6700ADA064 /* Main.storyboard */,
 				67943840262EFC6800ADA064 /* Assets.xcassets */,
@@ -109,6 +135,7 @@
 				67AEFCBB263059890058AF18 /* FeedbackGenerator.swift */,
 				67902A302636CBF70090FDA1 /* PassthroughView.swift */,
 				6778AD7326386C4B000B0307 /* HapticManager.swift */,
+				67954986264246CF00B4D1C3 /* LofeltGenerator.swift */,
 			);
 			path = ReMind;
 			sourceTree = "<group>";
@@ -130,6 +157,14 @@
 			path = Sounds;
 			sourceTree = "<group>";
 		};
+		6795497C2642450B00B4D1C3 /* Lofelt Haptics */ = {
+			isa = PBXGroup;
+			children = (
+				67954982264245CC00B4D1C3 /* pop.haptic */,
+			);
+			path = "Lofelt Haptics";
+			sourceTree = "<group>";
+		};
 		6884309CD928810207BB2F1C /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -142,6 +177,7 @@
 		903C1F0BD6536FF0236EAB86 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				67D330882641E09400F9D8C5 /* LofeltHaptics.framework */,
 				8CAAECFDC996CF90F5155D3D /* Pods_ReMind.framework */,
 			);
 			name = Frameworks;
@@ -158,6 +194,7 @@
 				67943830262EFC6700ADA064 /* Sources */,
 				67943831262EFC6700ADA064 /* Frameworks */,
 				67943832262EFC6700ADA064 /* Resources */,
+				6795497B264243D500B4D1C3 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -205,6 +242,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				67954983264245CC00B4D1C3 /* pop.haptic in Resources */,
 				67D33081264045B200F9D8C5 /* HotelSong.mp3 in Resources */,
 				67D3308726409A7900F9D8C5 /* Speechless_MIDI.mp3 in Resources */,
 				6794385B262EFE6100ADA064 /* p1.wav in Resources */,
@@ -254,6 +292,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6794383C262EFC6700ADA064 /* ViewController.swift in Sources */,
+				67954987264246CF00B4D1C3 /* LofeltGenerator.swift in Sources */,
 				67AEFCBC263059890058AF18 /* FeedbackGenerator.swift in Sources */,
 				67943838262EFC6700ADA064 /* AppDelegate.swift in Sources */,
 				67902A312636CBF70090FDA1 /* PassthroughView.swift in Sources */,
@@ -261,6 +300,7 @@
 				67943863262F0F9600ADA064 /* Split.swift in Sources */,
 				6794383A262EFC6700ADA064 /* SceneDelegate.swift in Sources */,
 				6778AD7426386C4B000B0307 /* HapticManager.swift in Sources */,
+				6795498C26424D0000B4D1C3 /* HapticsViewController.swift in Sources */,
 				67943867262F305600ADA064 /* SplitCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -411,6 +451,10 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 2HG8AL7F4U;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = ReMind/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -420,6 +464,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_WORKSPACE = YES;
 			};
 			name = Debug;
 		};
@@ -431,6 +476,10 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 2HG8AL7F4U;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = ReMind/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -440,6 +489,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_WORKSPACE = YES;
 			};
 			name = Release;
 		};
