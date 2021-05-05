@@ -203,7 +203,7 @@ class HapticGenerator {
         }
     }
     
-    func fireFunkyPattern() {
+    func fireSwipePattern() {
         // create a dull, strong haptic
         let sharpness = CHHapticEventParameter(parameterID: .hapticSharpness, value: 0)
         let intensity = CHHapticEventParameter(parameterID: .hapticIntensity, value: 1)

@@ -111,9 +111,10 @@ class ViewController: UIViewController {
     
     private func setupLeftPanelGestures() {
         // Skip back 3 seconds
-        let doubleTap = UITapGestureRecognizer(target: self, action:  #selector(leftPanelDoubleTap(recognizer:)))
-        doubleTap.numberOfTapsRequired = 2
-        leftPanel.addGestureRecognizer(doubleTap)
+        let twoFingerDoubleTap = UITapGestureRecognizer(target: self, action:  #selector(leftPanelTwoFingerDoubleTap(recognizer:)))
+        twoFingerDoubleTap.numberOfTouchesRequired = 2
+        twoFingerDoubleTap.numberOfTapsRequired = 2
+        leftPanel.addGestureRecognizer(twoFingerDoubleTap)
         
         let singleTap = UITapGestureRecognizer(target: self, action:  #selector(leftPanelSingleTap(recognizer:)))
         leftPanel.addGestureRecognizer(singleTap)
@@ -131,7 +132,8 @@ class ViewController: UIViewController {
         leftPanel.addGestureRecognizer(swipeDown)
     }
     
-    @objc func leftPanelDoubleTap(recognizer: UILongPressGestureRecognizer) {
+    @objc func leftPanelTwoFingerDoubleTap(recognizer: UILongPressGestureRecognizer) {
+        lofeltGenerator.play(pattern: .airPop)
         switch recognizer.state {
         case .ended:
             back(by: 3)
@@ -141,33 +143,34 @@ class ViewController: UIViewController {
     }
     
     @objc func leftPanelSingleTap(recognizer: UILongPressGestureRecognizer) {
-        let lofelt = LofeltGenerator()
-        lofelt.playPattern()
-//        switch recognizer.state {
-//        case .ended:
-//            playMusic(shouldSwitch: true)
-//        case .began, .possible, .cancelled, .failed, .changed: break
-//        @unknown default: break
-//        }
+        lofeltGenerator.play(pattern: .tab2)
+        switch recognizer.state {
+        case .ended:
+            playMusic(shouldSwitch: true)
+        case .began, .possible, .cancelled, .failed, .changed: break
+        @unknown default: break
+        }
     }
     
     @objc func leftSwipeUp(recognizer: UISwipeGestureRecognizer) {
-        hapticGenerator?.fireFunkyPattern()
+        hapticGenerator?.fireSwipePattern()
         handleSwipe(recognizer: recognizer)
     }
     
     @objc func leftSwipeDown(recognizer: UISwipeGestureRecognizer) {
-        hapticGenerator?.fireFunkyPattern()
+        hapticGenerator?.fireSwipePattern()
         handleSwipe(recognizer: recognizer)
     }
     
     private func setupRightPanelGestures() {
         // Skip forward 3 seconds
-        let doubleTap = UITapGestureRecognizer(target: self, action:  #selector(rightPanelDoubleTap(recognizer:)))
-        doubleTap.numberOfTapsRequired = 2
-        rightPanel.addGestureRecognizer(doubleTap)
+        let twoFingerDoubleTap = UITapGestureRecognizer(target: self, action:  #selector(rightPanelTwoFingerDoubleTap(recognizer:)))
+        twoFingerDoubleTap.numberOfTouchesRequired = 2
+        twoFingerDoubleTap.numberOfTapsRequired = 2
+        rightPanel.addGestureRecognizer(twoFingerDoubleTap)
         
         let singleTap = UITapGestureRecognizer(target: self, action:  #selector(rightPanelSingleTap(recognizer:)))
+        singleTap.numberOfTapsRequired = 1
         rightPanel.addGestureRecognizer(singleTap)
         
         let swipeUp = UISwipeGestureRecognizer(target: self, action: #selector(leftSwipeUp(recognizer:)))
@@ -183,7 +186,8 @@ class ViewController: UIViewController {
         rightPanel.addGestureRecognizer(swipeDown)
     }
     
-    @objc func rightPanelDoubleTap(recognizer: UILongPressGestureRecognizer) {
+    @objc func rightPanelTwoFingerDoubleTap(recognizer: UILongPressGestureRecognizer) {
+        lofeltGenerator.play(pattern: .airPop)
         switch recognizer.state {
         case .ended:
             forward(by: 3)
@@ -193,6 +197,7 @@ class ViewController: UIViewController {
     }
     
     @objc func rightPanelSingleTap(recognizer: UILongPressGestureRecognizer) {
+        lofeltGenerator.play(pattern: .tab2)
         switch recognizer.state {
         case .ended:
             playMusic(shouldSwitch: true)

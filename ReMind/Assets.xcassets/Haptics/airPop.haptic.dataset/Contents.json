@@ -1,0 +1,12 @@
+{
+  "data" : [
+    {
+      "filename" : "airPop.haptic",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}
