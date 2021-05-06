@@ -1,0 +1,12 @@
+{
+  "data" : [
+    {
+      "filename" : "shutter.haptic",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

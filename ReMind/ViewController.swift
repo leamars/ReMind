@@ -51,13 +51,14 @@ class ViewController: UIViewController {
     @IBOutlet weak var playPauseBtn: UIButton!
     @IBOutlet weak var loopBtn: UIButton!
     @IBOutlet weak var clearBtn: UIButton!
-    @IBOutlet weak var panel: UIView!
     
     private var originalPlayheadLeadingConstant: CGFloat = 0.0
     
     var playbackTimer: Timer?
     
     var previousHapticX: CGFloat = 0
+    
+    var panGestureRecognizer: UIPanGestureRecognizer!
     
     private let timeRemainingFormatter: DateComponentsFormatter = {
         let formatter = DateComponentsFormatter()
@@ -94,20 +95,20 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         setupPlayer()
-        setupGestureRecognizers()
         setupPlaybackTimer()
-
-        setupSpeechRecognition()
-
+        //setupSpeechRecognition()
         setupPanelGestures()
-        //setupRightPanelGestures()
-
-        collectionView.automaticallyAdjustsScrollIndicatorInsets = false
 
         previousHapticX = leadingPlayheadConstraint.constant
         originalPlayheadLeadingConstant = leadingPlayheadConstraint.constant
 
+        collectionView.automaticallyAdjustsScrollIndicatorInsets = false
         collectionView.isScrollEnabled = false
+        collectionView.backgroundColor = .clear
+        collectionView.backgroundView?.backgroundColor = .clear
+        
+        view.accessibilityTraits = UIAccessibilityTraits.allowsDirectInteraction
+        view.isAccessibilityElement = true
     }
     
     private func setupPanelGestures() {
@@ -115,112 +116,62 @@ class ViewController: UIViewController {
         let twoFingerDoubleTap = UITapGestureRecognizer(target: self, action:  #selector(panelTwoFingerDoubleTap(recognizer:)))
         twoFingerDoubleTap.numberOfTouchesRequired = 2
         twoFingerDoubleTap.numberOfTapsRequired = 2
-        panel.addGestureRecognizer(twoFingerDoubleTap)
+        view.addGestureRecognizer(twoFingerDoubleTap)
         
-        let singleTap = UITapGestureRecognizer(target: self, action:  #selector(panelSingleTap(recognizer:)))
-        panel.addGestureRecognizer(singleTap)
+        let twoFingerSingleTap = UITapGestureRecognizer(target: self, action:  #selector(panelTwoFingerSingleTap(recognizer:)))
+        view.addGestureRecognizer(twoFingerSingleTap)
+        twoFingerSingleTap.numberOfTouchesRequired = 2
+        
+        let doubleTap = UITapGestureRecognizer(target: self, action:  #selector(panelDoubleTap(recognizer:)))
+        view.addGestureRecognizer(doubleTap)
+        doubleTap.numberOfTapsRequired = 2
         
         let swipeUp = UISwipeGestureRecognizer(target: self, action: #selector(panelSwipeUp(recognizer:)))
         swipeUp.numberOfTouchesRequired = 1
         swipeUp.direction = .up
         swipeUp.delegate = self
-        panel.addGestureRecognizer(swipeUp)
+        view.addGestureRecognizer(swipeUp)
         
         let swipeDown = UISwipeGestureRecognizer(target: self, action: #selector(panelSwipeDown(recognizer:)))
         swipeDown.numberOfTouchesRequired = 1
         swipeDown.direction = .down
         swipeDown.delegate = self
-        panel.addGestureRecognizer(swipeDown)
+        view.addGestureRecognizer(swipeDown)
+        
+//        let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(panelSwipeLeft(recognizer:)))
+//        swipeLeft.numberOfTouchesRequired = 2
+//        swipeLeft.direction = .left
+//        swipeLeft.delegate = self
+//        view.addGestureRecognizer(swipeLeft)
+//
+//        let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(panelSwipeRight(recognizer:)))
+//        swipeRight.numberOfTouchesRequired = 2
+//        swipeRight.direction = .right
+//        swipeRight.delegate = self
+//        view.addGestureRecognizer(swipeRight)
         
         let longPress = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress(recognizer:)))
-        panel.addGestureRecognizer(longPress)
+        view.addGestureRecognizer(longPress)
         longPress.delegate = self
+
+        panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(handlePan(recognizer:)))
+        view.addGestureRecognizer(panGestureRecognizer)
+        panGestureRecognizer.require(toFail: swipeDown)
+        panGestureRecognizer.require(toFail: swipeUp)
+        //panGestureRecognizer.require(toFail: swipeLeft)
+        //panGestureRecognizer.require(toFail: swipeRight)
+        //panGestureRecognizer.isEnabled = false
         
-        let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(handlePan(recognizer:)))
-        panel.addGestureRecognizer(panGestureRecognizer)
-    }
-    
-    @objc func panelTwoFingerDoubleTap(recognizer: UILongPressGestureRecognizer) {
-        lofeltGenerator.play(pattern: .airPop)
-        let touchPoint = recognizer.location(in: panel)
-        let inLeftPanel = touchPoint.x < panel.frame.size.width/2
+        let pinchGestureRecognizer = UIPinchGestureRecognizer(target: self, action: #selector(handlePinch(recognizer:)))
+        view.addGestureRecognizer(pinchGestureRecognizer)
         
-        switch recognizer.state {
-        case .ended:
-            if inLeftPanel {
-                back(by: 3)
-            } else {
-                forward(by: 3)
-            }
-        case .began, .possible, .cancelled, .failed, .changed: break
-        @unknown default: break
-        }
-    }
-    
-    @objc func panelSingleTap(recognizer: UILongPressGestureRecognizer) {
-        lofeltGenerator.play(pattern: .tab2)
-        switch recognizer.state {
-        case .ended:
-            playMusic(shouldSwitch: true)
-        case .began, .possible, .cancelled, .failed, .changed: break
-        @unknown default: break
-        }
-    }
-    
-    @objc func panelSwipeUp(recognizer: UISwipeGestureRecognizer) {
-        hapticGenerator?.fireSwipePattern()
-        handleSwipe(recognizer: recognizer)
-    }
-    
-    @objc func panelSwipeDown(recognizer: UISwipeGestureRecognizer) {
-        hapticGenerator?.fireSwipePattern()
-        handleSwipe(recognizer: recognizer)
-    }
-    
-    @objc func panelLongPress(recognizer: UILongPressGestureRecognizer) {
-        player.stop()
+        let threeFingerLongPress = UILongPressGestureRecognizer(target: self, action: #selector(threeFingerLongPress(recognizer:)))
+        threeFingerLongPress.numberOfTouchesRequired = 3
+        view.addGestureRecognizer(threeFingerLongPress)
         
-        switch recognizer.state {
-        case .began: return
-        case .ended:
-            panel.backgroundColor = .clear
-            
-        case .possible, .cancelled, .failed, .changed: break
-        @unknown default: break
-        }
-    }
-    
-    private func setupGestureRecognizers() {
-        let longPress = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress(recognizer:)))
-        collectionView.addGestureRecognizer(longPress)
-        longPress.delegate = self
-        
-        let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(handlePan(recognizer:)))
-        collectionView.addGestureRecognizer(panGestureRecognizer)
-        
-        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTap(recognizer:)))
-        collectionView.addGestureRecognizer(tapGestureRecognizer)
-        
-        let doubleTap = UITapGestureRecognizer(target: self, action:  #selector(handleDoubleTap(recognizer:)))
-        doubleTap.numberOfTapsRequired = 2
-        collectionView.addGestureRecognizer(doubleTap)
-        
-        tapGestureRecognizer.require(toFail: doubleTap)
-        
-        let pinchRecognizer = UIPinchGestureRecognizer(target: self, action: #selector(handlePinch(recognizer:)))
-        collectionView.addGestureRecognizer(pinchRecognizer)
-        
-        let swipeUpGesture = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipeUp(recognizer:)))
-        swipeUpGesture.numberOfTouchesRequired = 1
-        swipeUpGesture.direction = .up
-        swipeUpGesture.delegate = self
-        collectionView.addGestureRecognizer(swipeUpGesture)
-        
-        let swipeDownGesture = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipeDown(recognizer:)))
-        swipeDownGesture.numberOfTouchesRequired = 1
-        swipeDownGesture.direction = .down
-        swipeDownGesture.delegate = self
-        collectionView.addGestureRecognizer(swipeDownGesture)
+        let fourFingerLongPress = UILongPressGestureRecognizer(target: self, action: #selector(fourFingerLongPress(recognizer:)))
+        fourFingerLongPress.numberOfTouchesRequired = 4
+        view.addGestureRecognizer(fourFingerLongPress)
     }
     
     private func setupPlayer() {
@@ -232,7 +183,10 @@ class ViewController: UIViewController {
         player.buffering = .always
         player.completionHandler = { [weak self] in
             guard let self = self,
-                  let split = self.selectedSplit, self.isLooping else { return }
+                  let split = self.selectedSplit, self.isLooping else {
+                self?.playFromCurrentPositionToEnd()
+                return
+            }
             
             self.player.play(from: split.startTime, to: split.endTime)
         }
@@ -369,20 +323,17 @@ class ViewController: UIViewController {
     }
     
     // MARK: - Gesture recognizers
-    @objc func handleTap(recognizer: UITapGestureRecognizer) {
-        FeedbackGenerator.shared.fire(for: .heavy)
-        playMusic(shouldSwitch: true)
-    }
     
     @objc func handlePan(recognizer: UIPanGestureRecognizer) {
+        print("Panning")
         player.stop()
-        
+
         switch recognizer.state {
         case .began: return
             //hapticGenerator?.fireContinuous()
         case .changed:
-            let touchPoint = recognizer.location(in: panel)
-            let convertedTouchPoint = panel.convert(touchPoint, to: collectionView)
+            let touchPoint = recognizer.location(in: view)
+            let convertedTouchPoint = view.convert(touchPoint, to: collectionView)
             var newX = convertedTouchPoint.x
             if newX < collectionView.frame.origin.x {
                 newX = collectionView.frame.origin.x
@@ -413,6 +364,7 @@ class ViewController: UIViewController {
             leadingPlayheadConstraint.constant = newX
         case .ended:
             playMusic(shouldSwitch: false)
+            //panGestureRecognizer.isEnabled = false
             //hapticGenerator?.stop()
             
         case .possible, .cancelled, .failed: break
@@ -426,9 +378,10 @@ class ViewController: UIViewController {
         switch recognizer.state {
         case .began:
             FeedbackGenerator.shared.fire(for: .heavy)
-            let touchPoint = recognizer.location(in: panel)
-            let convertedTouchPoint = panel.convert(touchPoint, to: collectionView)
+            let touchPoint = recognizer.location(in: view)
+            let convertedTouchPoint = view.convert(touchPoint, to: collectionView)
             leadingPlayheadConstraint.constant = convertedTouchPoint.x
+            //panGestureRecognizer.isEnabled = true
             
         case .ended:
             playMusic(shouldSwitch: false)
@@ -438,35 +391,115 @@ class ViewController: UIViewController {
         }
     }
     
-    @objc func handleDoubleTap(recognizer: UILongPressGestureRecognizer) {
-        let touchPoint = recognizer.location(in: collectionView)
+    @objc func panelSwipeUp(recognizer: UISwipeGestureRecognizer) {
+        print("Swipe UP")
+        hapticGenerator?.fireSwipePattern()
+        lofeltGenerator.play(audioOnlyPattern: .expand)
+        handleSwipe(recognizer: recognizer)
+    }
+    
+    @objc func panelSwipeDown(recognizer: UISwipeGestureRecognizer) {
+        print("Swipe DOWN")
+        hapticGenerator?.fireSwipePattern()
+        lofeltGenerator.play(audioOnlyPattern: .collapse)
+        handleSwipe(recognizer: recognizer)
+    }
+    
+    @objc func panelSwipeLeft(recognizer: UISwipeGestureRecognizer) {
+        print("Swipe LEFT")
+        back(by: 3)
+        handleSwipe(recognizer: recognizer)
+    }
+    
+    @objc func panelSwipeRight(recognizer: UISwipeGestureRecognizer) {
+        print("Swipe RIGHT")
+        forward(by: 3)
+        handleSwipe(recognizer: recognizer)
+    }
+    
+    @objc func panelTwoFingerDoubleTap(recognizer: UITapGestureRecognizer) {
+        let touchPoint = recognizer.location(in: view)
+        let inLeftHalf = touchPoint.x < view.frame.size.width/2
         
         switch recognizer.state {
         case .ended:
-            playSplitIfPossible(at: touchPoint)
+            if inLeftHalf {
+                lofeltGenerator.play(pattern: .unlock, withAudio: true)
+                playPreviousSplitIfPossible()
+                //back(by: 3)
+            } else {
+                lofeltGenerator.play(pattern: .lock, withAudio: true)
+                playNextSplitIfPossible()
+                //forward(by: 3)
+            }
         case .began, .possible, .cancelled, .failed, .changed: break
         @unknown default: break
         }
     }
     
     @objc func handlePinch(recognizer: UIPinchGestureRecognizer) {
-        
+        print("PINCH")
         switch recognizer.state {
+        case .began:
+            lofeltGenerator.play(pattern: .tab1, withAudio: true)
         case .ended:
             // If player is looping, combine the looping split with the next one
             combineLoopingSplitWithNext()
+        case .possible, .cancelled, .failed, .changed: break
+        @unknown default: break
+        }
+    }
+    
+    @objc func panelTwoFingerSingleTap(recognizer: UITapGestureRecognizer) {
+        print("TWO FINGER SINGLE TAP")
+        lofeltGenerator.play(pattern: .tab1, withAudio: true)
+        switch recognizer.state {
+        case .ended:
+            playMusic(shouldSwitch: true)
         case .began, .possible, .cancelled, .failed, .changed: break
         @unknown default: break
         }
     }
     
+    // Sound comes from "splitTrack()"
+    @objc func panelDoubleTap(recognizer: UITapGestureRecognizer) {
+        switch recognizer.state {
+        case .ended:
+            splitTrack()
+        case .began, .possible, .cancelled, .failed, .changed: break
+        @unknown default: break
+        }
+    }
+    
+    @objc func threeFingerLongPress(recognizer: UILongPressGestureRecognizer) {
+        print("THREE FINGER LONG PRESS")
+        switch recognizer.state {
+        case .began:
+            loop()
+            lofeltGenerator.play(pattern: .pop, withAudio: true)
+        case .ended, .possible, .cancelled, .failed, .changed: break
+        @unknown default: break
+        }
+    }
+    
+    @objc func fourFingerLongPress(recognizer: UILongPressGestureRecognizer) {
+        print("FOUR FINGER LONG PRESS")
+        switch recognizer.state {
+        case .began:
+            clearSplits()
+            lofeltGenerator.play(pattern: .shutter, withAudio: true)
+        case .ended, .possible, .cancelled, .failed, .changed: break
+        @unknown default: break
+        }
+    }
+        
     private func combineLoopingSplitWithNext() {
-        if let selectedSplit = selectedSplit, isLooping,
-           let splitIndex = indexOfSelectedSplit,
+        if let splitIndex = indexOfSelectedSplit,
            splits.count > splitIndex + 1 {
             
             let nextSplit = splits[splitIndex+1]
-            let combinedSplit = Split(startTime: selectedSplit.startTime, endTime: nextSplit.endTime)
+            let currentSplit = splits[splitIndex]
+            let combinedSplit = Split(startTime: currentSplit.startTime, endTime: nextSplit.endTime)
             
             splits.remove(at: splitIndex)
             splits.remove(at: splitIndex)
@@ -496,10 +529,17 @@ class ViewController: UIViewController {
                 changeTime(by: -0.1)
             case .up:
                 changeTime(by: 0.1)
-            case .left, .right: break
+            case .left:
+                if recognizer.numberOfTouchesRequired == 2 {
+                    playPreviousSplitIfPossible()
+                }
+            case .right:
+                if recognizer.numberOfTouchesRequired == 2 {
+                    playNextSplitIfPossible()
+                }
             default: break
             }
-        case .possible, .cancelled, .failed, .changed: break
+        case .began, .possible, .cancelled, .failed, .changed: break
         @unknown default: break
         }
     }
@@ -522,20 +562,42 @@ class ViewController: UIViewController {
     }
     
     @IBAction func loop(_ sender: Any) {
-        if selectedSplit == nil {
-            selectedSplit = splits.first
-        }
+        loop()
+    }
+    
+    private func loop() {
+        lofeltGenerator.play(pattern: .loop, withAudio: true)
         
-        playCurrentSplit()
+        if !isLooping {
+            
+            if selectedSplit == nil {
+                selectedSplit = splits.first
+            }
+            
+            playCurrentSplit()
+        } else {
+            playMusic(shouldSwitch: false, loop: false)
+        }
     }
     
     @IBAction func clearSplits(_ sender: Any) {
+        lofeltGenerator.play(pattern: .clear, withAudio: true)
         clearSplits()
     }
     
-    // Only gets triggered when user interacts with this
-    @IBAction func timerSliderChanged(_ sender: UISlider) {
-        print("My value is: \(sender.value)")
+    @IBAction func previousSplit(_ sender: Any) {
+        lofeltGenerator.play(pattern: .unlock, withAudio: true)
+        playPreviousSplitIfPossible()
+    }
+    
+    @IBAction func nextSplit(_ sender: Any) {
+        lofeltGenerator.play(pattern: .lock, withAudio: true)
+        playNextSplitIfPossible()
+    }
+    
+    @IBAction func combineWithNext(_ sender: Any) {
+        lofeltGenerator.play(pattern: .tab1, withAudio: true)
+        combineLoopingSplitWithNext()
     }
     
     private func playMusic(shouldSwitch: Bool, loop: Bool = false, from: Double? = nil, to: Double? = nil) {
@@ -549,18 +611,21 @@ class ViewController: UIViewController {
                     if let from = from, let to = to {
                         player.play(from: from, to: to)
                     } else {
-                        let currentPosition = leadingPlayheadConstraint.constant - collectionView.frame.origin.x
-                        let currentTime = currentPosition / maxWidth * CGFloat(player.duration)
-                        player.play(from: Double(currentTime))
+                        playFromCurrentPositionToEnd()
                     }
                 }
             }
             
             if let from = from, let to = to {
                 player.play(from: from, to: to)
+            } else {
+                if !isLooping && player.isPlaying {
+                    playFromCurrentPositionToEnd()
+                }
             }
             
             updatePlayButtonText()
+            updateLoopButtonText()
         }
         
         let maxWidth = self.collectionView.frame.width
@@ -578,12 +643,29 @@ class ViewController: UIViewController {
         startLabel.text = createTimeString(time: Float(from))
     }
     
+    private func playFromCurrentPositionToEnd() {
+        let maxWidth = self.collectionView.frame.width
+        
+        let currentPosition = leadingPlayheadConstraint.constant - collectionView.frame.origin.x
+        let currentTime = currentPosition / maxWidth * CGFloat(player.duration)
+        player.play(from: Double(currentTime), to: player.duration)
+        updatePlayButtonText()
+    }
+    
     private func updatePlayButtonText() {
         let text = player.isPlaying ? "Pause" : "Play"
         
         playPauseBtn.setTitle(text, for: .normal)
         playPauseBtn.setTitle(text, for: .selected)
         playPauseBtn.setTitle(text, for: .highlighted)
+    }
+    
+    private func updateLoopButtonText() {
+        let text = isLooping ? "Unloop" : "Loop"
+        
+        loopBtn.setTitle(text, for: .normal)
+        loopBtn.setTitle(text, for: .selected)
+        loopBtn.setTitle(text, for: .highlighted)
     }
     
     private func updateTimeStrings() {
@@ -595,6 +677,8 @@ class ViewController: UIViewController {
         }
         
     private func splitTrack() {
+        lofeltGenerator.play(pattern: .unlock, withAudio: true)
+        
         if let indexPath = indexPathAtPlayheadPoint {
 
             let row = indexPath.row
@@ -666,6 +750,7 @@ class ViewController: UIViewController {
         guard let last = splits.last else { return }
         let fullSplit = Split(startTime: 0.0, endTime: last.endTime)
         splits = [fullSplit]
+        selectedSplit = nil
         collectionView.reloadData()
     }
     

@@ -18,10 +18,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="plC-PG-bN3">
-                                <rect key="frame" x="44" y="98" width="602" height="197.5"/>
+                                <rect key="frame" x="44" y="98" width="398" height="197.5"/>
                                 <subviews>
-                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Dv2-Fr-fs6">
-                                        <rect key="frame" x="0.0" y="34.5" width="602" height="128"/>
+                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Dv2-Fr-fs6" customClass="PassCollectionView" customModule="ReMind" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="34.5" width="398" height="128"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="128" id="MFq-f0-vaW"/>
@@ -32,6 +32,10 @@
                                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         </collectionViewFlowLayout>
+                                        <stackView key="backgroundView" opaque="NO" contentMode="scaleToFill" id="eDZ-8p-4KB">
+                                            <rect key="frame" x="0.0" y="0.0" width="398" height="128"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        </stackView>
                                         <cells>
                                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="CollectionSplitCell" id="tEU-67-l8C" customClass="SplitCell" customModule="ReMind" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
@@ -105,10 +109,6 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="U8j-Xr-tpu" userLabel="Panel">
-                                <rect key="frame" x="0.0" y="0.0" width="690" height="414"/>
-                                <color key="backgroundColor" red="1" green="0.80000000000000004" blue="0.0" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
-                            </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Speed: 1.0x" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lzn-vo-kjn">
                                 <rect key="frame" x="754" y="40" width="98" height="23"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
@@ -116,16 +116,16 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="erH-Zp-73W">
-                                <rect key="frame" x="44" y="341" width="602" height="60"/>
+                                <rect key="frame" x="44" y="361" width="398" height="40"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DBB-pw-lqi">
-                                        <rect key="frame" x="0.0" y="0.0" width="92" height="60"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DBB-pw-lqi" customClass="RoundedButton" customModule="ReMind" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="58" height="40"/>
                                         <color key="backgroundColor" red="0.11352146420000001" green="0.73872905970000002" blue="0.61175280809999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <constraints>
                                             <constraint firstAttribute="width" relation="lessThanOrEqual" constant="100" id="Ob2-0b-Eje"/>
-                                            <constraint firstAttribute="height" constant="60" id="xdp-Ft-vxZ"/>
+                                            <constraint firstAttribute="height" constant="40" id="xdp-Ft-vxZ"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
                                         <state key="normal" title="Slower">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
@@ -133,14 +133,14 @@
                                             <action selector="turnRateDown:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Xew-3n-gKQ"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="91G-7E-pRY">
-                                        <rect key="frame" x="102" y="0.0" width="92" height="60"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="91G-7E-pRY" customClass="RoundedButton" customModule="ReMind" customModuleProvider="target">
+                                        <rect key="frame" x="68" y="0.0" width="58" height="40"/>
                                         <color key="backgroundColor" red="0.11352146420000001" green="0.73872905970000002" blue="0.61175280809999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="60" id="85c-kv-b84"/>
+                                            <constraint firstAttribute="height" constant="40" id="85c-kv-b84"/>
                                             <constraint firstAttribute="width" relation="lessThanOrEqual" constant="100" id="rmG-Js-FzG"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
                                         <state key="normal" title="Faster">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
@@ -148,14 +148,14 @@
                                             <action selector="turnRateUp:" destination="BYZ-38-t0r" eventType="touchUpInside" id="qok-aP-3z4"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nC9-ZX-UlJ">
-                                        <rect key="frame" x="204" y="0.0" width="92" height="60"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nC9-ZX-UlJ" customClass="RoundedButton" customModule="ReMind" customModuleProvider="target">
+                                        <rect key="frame" x="136" y="0.0" width="58" height="40"/>
                                         <color key="backgroundColor" red="0.11352146420000001" green="0.73872905970000002" blue="0.61175280809999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <constraints>
                                             <constraint firstAttribute="width" relation="lessThanOrEqual" constant="100" id="RIE-g4-8sY"/>
-                                            <constraint firstAttribute="height" constant="60" id="r8z-2t-iQj"/>
+                                            <constraint firstAttribute="height" constant="40" id="r8z-2t-iQj"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
                                         <state key="normal" title="Split">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
@@ -163,14 +163,14 @@
                                             <action selector="split:" destination="BYZ-38-t0r" eventType="touchUpInside" id="lTC-NR-5GN"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dJ3-HB-UwH">
-                                        <rect key="frame" x="306" y="0.0" width="92" height="60"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dJ3-HB-UwH" customClass="RoundedButton" customModule="ReMind" customModuleProvider="target">
+                                        <rect key="frame" x="204" y="0.0" width="58" height="40"/>
                                         <color key="backgroundColor" red="0.11352146420000001" green="0.73872905970000002" blue="0.61175280809999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <constraints>
                                             <constraint firstAttribute="width" relation="lessThanOrEqual" constant="100" id="OcZ-4j-MSB"/>
-                                            <constraint firstAttribute="height" constant="60" id="ofv-1L-kOO"/>
+                                            <constraint firstAttribute="height" constant="40" id="ofv-1L-kOO"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
                                         <state key="normal" title="Play">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
@@ -178,14 +178,14 @@
                                             <action selector="playPause:" destination="BYZ-38-t0r" eventType="touchUpInside" id="o2Y-hO-PY6"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1A8-qW-KFy">
-                                        <rect key="frame" x="408" y="0.0" width="92" height="60"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1A8-qW-KFy" customClass="RoundedButton" customModule="ReMind" customModuleProvider="target">
+                                        <rect key="frame" x="272" y="0.0" width="58" height="40"/>
                                         <color key="backgroundColor" red="0.11352146420000001" green="0.73872905970000002" blue="0.61175280809999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="60" id="HNH-Sj-PTo"/>
+                                            <constraint firstAttribute="height" constant="40" id="HNH-Sj-PTo"/>
                                             <constraint firstAttribute="width" relation="lessThanOrEqual" constant="100" id="xfG-9p-CR7"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
                                         <state key="normal" title="Loop">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
@@ -193,14 +193,14 @@
                                             <action selector="loop:" destination="BYZ-38-t0r" eventType="touchUpInside" id="aVN-rS-uB9"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vZC-c4-Xcw">
-                                        <rect key="frame" x="510" y="0.0" width="92" height="60"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vZC-c4-Xcw" customClass="RoundedButton" customModule="ReMind" customModuleProvider="target">
+                                        <rect key="frame" x="340" y="0.0" width="58" height="40"/>
                                         <color key="backgroundColor" red="0.11352146420000001" green="0.73872905970000002" blue="0.61175280809999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <constraints>
                                             <constraint firstAttribute="width" relation="lessThanOrEqual" constant="100" id="P6S-VD-n7x"/>
-                                            <constraint firstAttribute="height" constant="60" id="oZA-ge-ATP"/>
+                                            <constraint firstAttribute="height" constant="40" id="oZA-ge-ATP"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
                                         <state key="normal" title="Clear">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
@@ -210,28 +210,76 @@
                                     </button>
                                 </subviews>
                             </stackView>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="NTi-cJ-xxb">
+                                <rect key="frame" x="44" y="8" width="262.5" height="40"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dqd-d1-WSB" customClass="RoundedButton" customModule="ReMind" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="81" height="40"/>
+                                        <color key="backgroundColor" red="0.11352146420000001" green="0.73872905970000002" blue="0.61175280809999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" relation="lessThanOrEqual" constant="100" id="6UF-Uy-Dh9"/>
+                                            <constraint firstAttribute="height" constant="40" id="TTp-CA-4z2"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
+                                        <state key="normal" title="Prev">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="previousSplit:" destination="BYZ-38-t0r" eventType="touchUpInside" id="4pm-1v-mcM"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MDn-vk-Qxz" customClass="RoundedButton" customModule="ReMind" customModuleProvider="target">
+                                        <rect key="frame" x="91" y="0.0" width="80.5" height="40"/>
+                                        <color key="backgroundColor" red="0.11352146420000001" green="0.73872905970000002" blue="0.61175280809999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="HkX-Zh-plG"/>
+                                            <constraint firstAttribute="width" relation="lessThanOrEqual" constant="100" id="yL2-YE-Pu0"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
+                                        <state key="normal" title="Next">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="nextSplit:" destination="BYZ-38-t0r" eventType="touchUpInside" id="s1X-f7-l2K"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mVJ-dd-Oon" customClass="RoundedButton" customModule="ReMind" customModuleProvider="target">
+                                        <rect key="frame" x="181.5" y="0.0" width="81" height="40"/>
+                                        <color key="backgroundColor" red="0.11352146420000001" green="0.73872905970000002" blue="0.61175280809999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="ECq-Hv-12U"/>
+                                            <constraint firstAttribute="width" relation="lessThanOrEqual" constant="100" id="Wff-JA-RZf"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
+                                        <state key="normal" title="Join">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="combineWithNext:" destination="BYZ-38-t0r" eventType="touchUpInside" id="q0W-As-AFM"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" systemColor="systemIndigoColor"/>
                         <constraints>
                             <constraint firstItem="Lzn-vo-kjn" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="40" id="1Ed-nH-7hS"/>
                             <constraint firstItem="Lzn-vo-kjn" firstAttribute="trailing" secondItem="fYa-2z-hob" secondAttribute="trailing" id="41H-do-PEs"/>
                             <constraint firstItem="qkp-FA-6rx" firstAttribute="top" secondItem="1LT-3K-iQs" secondAttribute="bottom" constant="9" id="DNR-zN-BUZ"/>
                             <constraint firstItem="plC-PG-bN3" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="Etc-Mq-uDe"/>
-                            <constraint firstItem="U8j-Xr-tpu" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" id="IE1-QL-mzb"/>
-                            <constraint firstItem="U8j-Xr-tpu" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="Mv2-h2-aiD"/>
-                            <constraint firstItem="U8j-Xr-tpu" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" constant="44" id="PdG-rV-5uk"/>
-                            <constraint firstItem="U8j-Xr-tpu" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="SKG-dI-J0Q"/>
+                            <constraint firstItem="Lzn-vo-kjn" firstAttribute="leading" secondItem="NTi-cJ-xxb" secondAttribute="trailing" constant="28" id="Rgd-aM-fcI"/>
                             <constraint firstItem="erH-Zp-73W" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="Srx-ek-Ht4"/>
                             <constraint firstItem="fYa-2z-hob" firstAttribute="trailing" secondItem="plC-PG-bN3" secondAttribute="trailing" constant="-10" id="Zbp-rU-DKP"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="leading" secondItem="NTi-cJ-xxb" secondAttribute="leading" id="dM2-cS-7DQ"/>
                             <constraint firstItem="qkp-FA-6rx" firstAttribute="leading" secondItem="plC-PG-bN3" secondAttribute="leading" constant="10" id="gO4-VU-89t"/>
                             <constraint firstItem="plC-PG-bN3" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="gWD-SH-ZGU"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="leading" secondItem="erH-Zp-73W" secondAttribute="leading" id="iDg-PZ-2Tt"/>
                             <constraint firstItem="plC-PG-bN3" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="iwf-Ff-cVb"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="leading" secondItem="U8j-Xr-tpu" secondAttribute="leading" constant="44" id="kBM-Od-LnH"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="leading" secondItem="plC-PG-bN3" secondAttribute="leading" id="lal-Ez-AgP"/>
                             <constraint firstItem="erH-Zp-73W" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="xzE-Ih-Q3Z"/>
                             <constraint firstItem="erH-Zp-73W" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" constant="8" id="yfV-6Z-u2X"/>
+                            <constraint firstItem="NTi-cJ-xxb" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="8" id="zCP-J7-o7V"/>
                             <constraint firstItem="fYa-2z-hob" firstAttribute="top" secondItem="1LT-3K-iQs" secondAttribute="bottom" constant="9" id="zUo-Eo-1md"/>
                         </constraints>
                     </view>
@@ -242,7 +290,6 @@
                         <outlet property="fasterBtn" destination="91G-7E-pRY" id="5SO-La-xvI"/>
                         <outlet property="leadingPlayheadConstraint" destination="fQF-NX-RIW" id="ezH-0t-tQy"/>
                         <outlet property="loopBtn" destination="1A8-qW-KFy" id="uou-jj-Gpy"/>
-                        <outlet property="panel" destination="U8j-Xr-tpu" id="9YH-Uh-jfC"/>
                         <outlet property="playHead" destination="1LT-3K-iQs" id="1iP-o7-y0q"/>
                         <outlet property="playPauseBtn" destination="dJ3-HB-UwH" id="Hnu-zD-ekY"/>
                         <outlet property="playTapGesture" destination="DEd-7S-PZm" id="Cxj-nx-iKO"/>
@@ -280,6 +327,9 @@
     <resources>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemIndigoColor">
+            <color red="0.34509803921568627" green="0.33725490196078434" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemPinkColor">
             <color red="1" green="0.17647058823529413" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

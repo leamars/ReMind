@@ -1,0 +1,12 @@
+{
+  "data" : [
+    {
+      "filename" : "clear.haptic",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

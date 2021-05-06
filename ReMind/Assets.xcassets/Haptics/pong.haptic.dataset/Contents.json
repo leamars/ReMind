@@ -1,0 +1,12 @@
+{
+  "data" : [
+    {
+      "filename" : "pong.haptic",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

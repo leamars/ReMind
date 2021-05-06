@@ -28,6 +28,16 @@ enum Pattern: String {
     case arise // Cancel or go back?
     case transitionLeft
     case transitionRight
+    case unlock
+    case clear
+    case loop
+    case loop2
+    case pong
+    case popped
+    case trippleClick
+    case snap
+    case lock
+    case shutter
     
     var fileName: String {
         return self.rawValue
@@ -46,11 +56,18 @@ class LofeltGenerator {
     var audioPlayer: AVAudioPlayer?
     var haptics: LofeltHaptics?
     
-    func play(pattern: Pattern) {
-        playPattern(audioFileName: pattern.audioFileName, hapticFileName: pattern.hapticFileName)
+    func play(pattern: Pattern, withAudio: Bool = false) {
+        playPattern(audioFileName: pattern.audioFileName, hapticFileName: pattern.hapticFileName, withAudio: withAudio)
     }
     
-    private func playPattern(audioFileName: String, hapticFileName: String) {
+    func play(audioOnlyPattern: Pattern) {
+        let audioData = NSDataAsset(name: audioOnlyPattern.audioFileName)
+        audioPlayer = try? AVAudioPlayer(data: audioData!.data)
+        
+        audioPlayer?.play()
+    }
+    
+    private func playPattern(audioFileName: String, hapticFileName: String, withAudio: Bool = false) {
         haptics = try? LofeltHaptics.init()
         
         let audioData = NSDataAsset(name: audioFileName)
@@ -60,7 +77,9 @@ class LofeltGenerator {
         try? haptics?.load(self.loadHapticData(fileName: hapticFileName))
         
         // play audio and haptic clip
-        //audioPlayer?.play()
+        if withAudio {
+            audioPlayer?.play()
+        }
         try? haptics?.play()
     }
     
