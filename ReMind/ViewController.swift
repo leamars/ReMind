@@ -96,7 +96,7 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view.
         setupPlayer()
         setupPlaybackTimer()
-        //setupSpeechRecognition()
+        setupSpeechRecognition()
         setupPanelGestures()
 
         previousHapticX = leadingPlayheadConstraint.constant
@@ -138,17 +138,17 @@ class ViewController: UIViewController {
         swipeDown.delegate = self
         view.addGestureRecognizer(swipeDown)
         
-//        let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(panelSwipeLeft(recognizer:)))
-//        swipeLeft.numberOfTouchesRequired = 2
-//        swipeLeft.direction = .left
-//        swipeLeft.delegate = self
-//        view.addGestureRecognizer(swipeLeft)
-//
-//        let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(panelSwipeRight(recognizer:)))
-//        swipeRight.numberOfTouchesRequired = 2
-//        swipeRight.direction = .right
-//        swipeRight.delegate = self
-//        view.addGestureRecognizer(swipeRight)
+        let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(panelSwipeLeft(recognizer:)))
+        //swipeLeft.numberOfTouchesRequired = 2
+        swipeLeft.direction = .left
+        swipeLeft.delegate = self
+        view.addGestureRecognizer(swipeLeft)
+
+        let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(panelSwipeRight(recognizer:)))
+        //swipeRight.numberOfTouchesRequired = 2
+        swipeRight.direction = .right
+        swipeRight.delegate = self
+        view.addGestureRecognizer(swipeRight)
         
         let longPress = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress(recognizer:)))
         view.addGestureRecognizer(longPress)
@@ -158,8 +158,8 @@ class ViewController: UIViewController {
         view.addGestureRecognizer(panGestureRecognizer)
         panGestureRecognizer.require(toFail: swipeDown)
         panGestureRecognizer.require(toFail: swipeUp)
-        //panGestureRecognizer.require(toFail: swipeLeft)
-        //panGestureRecognizer.require(toFail: swipeRight)
+        panGestureRecognizer.require(toFail: swipeLeft)
+        panGestureRecognizer.require(toFail: swipeRight)
         //panGestureRecognizer.isEnabled = false
         
         let pinchGestureRecognizer = UIPinchGestureRecognizer(target: self, action: #selector(handlePinch(recognizer:)))
@@ -195,9 +195,6 @@ class ViewController: UIViewController {
         timePitch.rate = 1.0
         AKManager.output = timePitch
         try! AKManager.start()
-        
-        let newDurationSeconds = Float(player.duration)
-        let currentTime = Float(CMTimeGetSeconds(CMTime(seconds: player.currentTime, preferredTimescale: 1)))
                 
         let fullSplit = Split(startTime: 0.0, endTime: player.duration)
         splits.append(fullSplit)
@@ -276,40 +273,55 @@ class ViewController: UIViewController {
         [unowned self]
         (result, _) in
         if let transcription = result?.bestTranscription,
-           let lastSegment = transcription.segments.last
-           //lastSegment.duration > mostRecentlyProcessedSegmentDuration
+           let lastSegment = transcription.segments.last,
+           lastSegment.duration < mostRecentlyProcessedSegmentDuration
             //print(transcription.formattedString)
            {
             
             mostRecentlyProcessedSegmentDuration = lastSegment.duration
             
-            switch lastSegment.substring {
+            print("I said \(lastSegment.substring)")
+            print("Last segment lasted for... \(lastSegment.duration)")
+            switch lastSegment.substring.lowercased() {
             case "cut":
+                lofeltGenerator.play(pattern: .unlock, withAudio: true)
                 splitTrack()
             case "add":
                 // Puts tracks together again
+                lofeltGenerator.play(pattern: .tab1, withAudio: true)
                 combineLoopingSplitWithNext()
             case "up":
+                lofeltGenerator.play(pattern: .expand, withAudio: true)
                 changeTime(by: 0.1)
             case "down":
+                lofeltGenerator.play(pattern: .collapse, withAudio: true)
                 changeTime(by: -0.1)
-            case "loop":
-                if let selectedIndex = indexPathAtPlayheadPoint {
-                    selectedSplit = splits[selectedIndex.row]
-                    isLooping = true
-
-                    playMusic(shouldSwitch: false, loop: true, from: selectedSplit!.startTime, to: selectedSplit!.endTime)
-                }
+            case "repeat":
+                lofeltGenerator.play(pattern: .pop, withAudio: true)
+                loop()
+//                if let selectedIndex = indexPathAtPlayheadPoint {
+//                    lofeltGenerator.play(pattern: .pop, withAudio: true)
+//                    selectedSplit = splits[selectedIndex.row]
+//                    isLooping = true
+//
+//                    playMusic(shouldSwitch: false, loop: true, from: selectedSplit!.startTime, to: selectedSplit!.endTime)
+//                }
             case "play":
+                lofeltGenerator.play(pattern: .tab1, withAudio: true)
                 playMusic(shouldSwitch: true)
             case "stop":
                 // TODO: This should probably start it form the beginning
+                lofeltGenerator.play(pattern: .tab1, withAudio: true)
                 playMusic(shouldSwitch: true)
             case "pause":
+                lofeltGenerator.play(pattern: .tab1, withAudio: true)
                 playMusic(shouldSwitch: true)
             case "start":
                 // Plays from the start
                 break
+            case "next":
+                lofeltGenerator.play(pattern: .lock, withAudio: true)
+                playNextSplitIfPossible()
             default: break
             }
         }
@@ -407,13 +419,17 @@ class ViewController: UIViewController {
     
     @objc func panelSwipeLeft(recognizer: UISwipeGestureRecognizer) {
         print("Swipe LEFT")
-        back(by: 3)
+        hapticGenerator?.fireSwipePattern()
+        lofeltGenerator.play(audioOnlyPattern: .expand)
+        back(by: 5)
         handleSwipe(recognizer: recognizer)
     }
     
     @objc func panelSwipeRight(recognizer: UISwipeGestureRecognizer) {
         print("Swipe RIGHT")
-        forward(by: 3)
+        hapticGenerator?.fireSwipePattern()
+        lofeltGenerator.play(audioOnlyPattern: .collapse)
+        forward(by: 5)
         handleSwipe(recognizer: recognizer)
     }
     

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
-    <device id="retina6_1" orientation="landscape" appearance="light"/>
+    <device id="ipad12_9rounded" orientation="landscape" layout="fullscreen" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -14,14 +14,14 @@
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="ReMind" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="896" height="414"/>
+                        <rect key="frame" x="0.0" y="0.0" width="1366" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="plC-PG-bN3">
-                                <rect key="frame" x="44" y="98" width="398" height="197.5"/>
+                                <rect key="frame" x="10" y="403.5" width="1346" height="197.5"/>
                                 <subviews>
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Dv2-Fr-fs6" customClass="PassCollectionView" customModule="ReMind" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="34.5" width="398" height="128"/>
+                                        <rect key="frame" x="0.0" y="34.5" width="1346" height="128"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="128" id="MFq-f0-vaW"/>
@@ -33,7 +33,7 @@
                                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         </collectionViewFlowLayout>
                                         <stackView key="backgroundView" opaque="NO" contentMode="scaleToFill" id="eDZ-8p-4KB">
-                                            <rect key="frame" x="0.0" y="0.0" width="398" height="128"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="1346" height="128"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         </stackView>
                                         <cells>
@@ -98,28 +98,28 @@
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qkp-FA-6rx">
-                                <rect key="frame" x="54" y="279" width="46" height="20.5"/>
+                                <rect key="frame" x="20" y="584.5" width="46" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="00:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fYa-2z-hob">
-                                <rect key="frame" x="806" y="279" width="46" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fYa-2z-hob">
+                                <rect key="frame" x="1300" y="584.5" width="46" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Speed: 1.0x" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lzn-vo-kjn">
-                                <rect key="frame" x="754" y="40" width="98" height="23"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Speed: 1.0x" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lzn-vo-kjn">
+                                <rect key="frame" x="1248.5" y="40" width="97.5" height="23"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="erH-Zp-73W">
-                                <rect key="frame" x="44" y="361" width="398" height="40"/>
+                                <rect key="frame" x="10" y="956" width="1346" height="40"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DBB-pw-lqi" customClass="RoundedButton" customModule="ReMind" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="58" height="40"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="216" height="40"/>
                                         <color key="backgroundColor" red="0.11352146420000001" green="0.73872905970000002" blue="0.61175280809999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <constraints>
                                             <constraint firstAttribute="width" relation="lessThanOrEqual" constant="100" id="Ob2-0b-Eje"/>
@@ -134,7 +134,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="91G-7E-pRY" customClass="RoundedButton" customModule="ReMind" customModuleProvider="target">
-                                        <rect key="frame" x="68" y="0.0" width="58" height="40"/>
+                                        <rect key="frame" x="226" y="0.0" width="216" height="40"/>
                                         <color key="backgroundColor" red="0.11352146420000001" green="0.73872905970000002" blue="0.61175280809999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="85c-kv-b84"/>
@@ -149,7 +149,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nC9-ZX-UlJ" customClass="RoundedButton" customModule="ReMind" customModuleProvider="target">
-                                        <rect key="frame" x="136" y="0.0" width="58" height="40"/>
+                                        <rect key="frame" x="452" y="0.0" width="216" height="40"/>
                                         <color key="backgroundColor" red="0.11352146420000001" green="0.73872905970000002" blue="0.61175280809999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <constraints>
                                             <constraint firstAttribute="width" relation="lessThanOrEqual" constant="100" id="RIE-g4-8sY"/>
@@ -164,7 +164,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dJ3-HB-UwH" customClass="RoundedButton" customModule="ReMind" customModuleProvider="target">
-                                        <rect key="frame" x="204" y="0.0" width="58" height="40"/>
+                                        <rect key="frame" x="678" y="0.0" width="216" height="40"/>
                                         <color key="backgroundColor" red="0.11352146420000001" green="0.73872905970000002" blue="0.61175280809999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <constraints>
                                             <constraint firstAttribute="width" relation="lessThanOrEqual" constant="100" id="OcZ-4j-MSB"/>
@@ -179,7 +179,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1A8-qW-KFy" customClass="RoundedButton" customModule="ReMind" customModuleProvider="target">
-                                        <rect key="frame" x="272" y="0.0" width="58" height="40"/>
+                                        <rect key="frame" x="904" y="0.0" width="216" height="40"/>
                                         <color key="backgroundColor" red="0.11352146420000001" green="0.73872905970000002" blue="0.61175280809999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="HNH-Sj-PTo"/>
@@ -194,7 +194,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vZC-c4-Xcw" customClass="RoundedButton" customModule="ReMind" customModuleProvider="target">
-                                        <rect key="frame" x="340" y="0.0" width="58" height="40"/>
+                                        <rect key="frame" x="1130" y="0.0" width="216" height="40"/>
                                         <color key="backgroundColor" red="0.11352146420000001" green="0.73872905970000002" blue="0.61175280809999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <constraints>
                                             <constraint firstAttribute="width" relation="lessThanOrEqual" constant="100" id="P6S-VD-n7x"/>
@@ -211,10 +211,10 @@
                                 </subviews>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="NTi-cJ-xxb">
-                                <rect key="frame" x="44" y="8" width="262.5" height="40"/>
+                                <rect key="frame" x="10" y="8" width="140" height="40"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dqd-d1-WSB" customClass="RoundedButton" customModule="ReMind" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="81" height="40"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
                                         <color key="backgroundColor" red="0.11352146420000001" green="0.73872905970000002" blue="0.61175280809999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <constraints>
                                             <constraint firstAttribute="width" relation="lessThanOrEqual" constant="100" id="6UF-Uy-Dh9"/>
@@ -229,7 +229,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MDn-vk-Qxz" customClass="RoundedButton" customModule="ReMind" customModuleProvider="target">
-                                        <rect key="frame" x="91" y="0.0" width="80.5" height="40"/>
+                                        <rect key="frame" x="50" y="0.0" width="40" height="40"/>
                                         <color key="backgroundColor" red="0.11352146420000001" green="0.73872905970000002" blue="0.61175280809999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="HkX-Zh-plG"/>
@@ -244,7 +244,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mVJ-dd-Oon" customClass="RoundedButton" customModule="ReMind" customModuleProvider="target">
-                                        <rect key="frame" x="181.5" y="0.0" width="81" height="40"/>
+                                        <rect key="frame" x="100" y="0.0" width="40" height="40"/>
                                         <color key="backgroundColor" red="0.11352146420000001" green="0.73872905970000002" blue="0.61175280809999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="ECq-Hv-12U"/>
@@ -267,18 +267,18 @@
                             <constraint firstItem="Lzn-vo-kjn" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="40" id="1Ed-nH-7hS"/>
                             <constraint firstItem="Lzn-vo-kjn" firstAttribute="trailing" secondItem="fYa-2z-hob" secondAttribute="trailing" id="41H-do-PEs"/>
                             <constraint firstItem="qkp-FA-6rx" firstAttribute="top" secondItem="1LT-3K-iQs" secondAttribute="bottom" constant="9" id="DNR-zN-BUZ"/>
-                            <constraint firstItem="plC-PG-bN3" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="Etc-Mq-uDe"/>
-                            <constraint firstItem="Lzn-vo-kjn" firstAttribute="leading" secondItem="NTi-cJ-xxb" secondAttribute="trailing" constant="28" id="Rgd-aM-fcI"/>
+                            <constraint firstItem="plC-PG-bN3" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" constant="-10" id="Etc-Mq-uDe"/>
                             <constraint firstItem="erH-Zp-73W" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="Srx-ek-Ht4"/>
                             <constraint firstItem="fYa-2z-hob" firstAttribute="trailing" secondItem="plC-PG-bN3" secondAttribute="trailing" constant="-10" id="Zbp-rU-DKP"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="leading" secondItem="NTi-cJ-xxb" secondAttribute="leading" id="dM2-cS-7DQ"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="leading" secondItem="NTi-cJ-xxb" secondAttribute="leading" constant="-10" id="dM2-cS-7DQ"/>
                             <constraint firstItem="qkp-FA-6rx" firstAttribute="leading" secondItem="plC-PG-bN3" secondAttribute="leading" constant="10" id="gO4-VU-89t"/>
                             <constraint firstItem="plC-PG-bN3" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="gWD-SH-ZGU"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="leading" secondItem="erH-Zp-73W" secondAttribute="leading" id="iDg-PZ-2Tt"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="leading" secondItem="erH-Zp-73W" secondAttribute="leading" constant="-10" id="iDg-PZ-2Tt"/>
                             <constraint firstItem="plC-PG-bN3" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="iwf-Ff-cVb"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="leading" secondItem="plC-PG-bN3" secondAttribute="leading" id="lal-Ez-AgP"/>
-                            <constraint firstItem="erH-Zp-73W" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="xzE-Ih-Q3Z"/>
-                            <constraint firstItem="erH-Zp-73W" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" constant="8" id="yfV-6Z-u2X"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="leading" secondItem="plC-PG-bN3" secondAttribute="leading" constant="-10" id="lal-Ez-AgP"/>
+                            <constraint firstItem="Lzn-vo-kjn" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="NTi-cJ-xxb" secondAttribute="trailing" constant="20" id="tp1-lp-197"/>
+                            <constraint firstItem="erH-Zp-73W" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" constant="-10" id="xzE-Ih-Q3Z"/>
+                            <constraint firstItem="erH-Zp-73W" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" constant="-8" id="yfV-6Z-u2X"/>
                             <constraint firstItem="NTi-cJ-xxb" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="8" id="zCP-J7-o7V"/>
                             <constraint firstItem="fYa-2z-hob" firstAttribute="top" secondItem="1LT-3K-iQs" secondAttribute="bottom" constant="9" id="zUo-Eo-1md"/>
                         </constraints>
@@ -306,14 +306,14 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="136.60714285714286" y="82.608695652173921"/>
+            <point key="canvasLocation" x="136.60322108345534" y="82.03125"/>
         </scene>
         <!--Haptics View Controller-->
         <scene sceneID="VJy-Qr-nrU">
             <objects>
                 <viewController id="T7B-cU-Rp9" customClass="HapticsViewController" customModule="ReMind" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="PfE-hA-uuM">
-                        <rect key="frame" x="0.0" y="0.0" width="896" height="414"/>
+                        <rect key="frame" x="0.0" y="0.0" width="1366" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <viewLayoutGuide key="safeArea" id="OU1-ax-qOa"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>

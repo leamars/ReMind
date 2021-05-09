@@ -11,14 +11,10 @@ import UIKit
 import os.log
 
 enum Pattern: String {
-    case pop
     case whoosh
     case smallWhoosh
-    case tab1
     case tab2
     case tab3
-    case collapse
-    case expand
     case success3
     //case aces
     case airPop // used for skipping back or forward for 3 seconds, gives that bit of "interrupt" feeling whe music stops and "rewinds"
@@ -28,7 +24,6 @@ enum Pattern: String {
     case arise // Cancel or go back?
     case transitionLeft
     case transitionRight
-    case unlock
     case clear
     case loop
     case loop2
@@ -36,8 +31,15 @@ enum Pattern: String {
     case popped
     case trippleClick
     case snap
-    case lock
-    case shutter
+    
+    case expand // faster
+    case collapse // slower
+    case unlock // tab 1 + previous split ALSO cut -- should probably change that
+    case lock // tab1 + next split
+    case tab1 // add two splits together ALSO play/pause
+    case pop // loop
+    case shutter // clear all splits
+    
     
     var fileName: String {
         return self.rawValue
